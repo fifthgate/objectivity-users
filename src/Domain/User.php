@@ -5,12 +5,12 @@ namespace Fifthgate\Objectivity\Users\Domain;
 use Fifthgate\Objectivity\Users\Domain\Interfaces\UserInterface;
 use \DateTimeInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionInterface;
-use Fifthgate\Objectivity\Core\Domain\AbstractTimestampingDomainEntity;
+use Fifthgate\Objectivity\Core\Domain\AbstractDomainEntity;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 
-class User extends AbstractTimestampingDomainEntity implements UserInterface
+class User extends AbstractDomainEntity implements UserInterface
 {
     use Notifiable;
 

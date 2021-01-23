@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Fifthgate\Objectivity\Users\Domain\User;
 use Fifthgate\Objectivity\Users\Service\Interfaces\UserServiceInterface;
 use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon;
+use \DateTime;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\UserRoleCollection;
 use Fifthgate\Objectivity\Users\Domain\ValueObjects\UserRole;
@@ -62,7 +62,7 @@ class UserTest extends ObjectivityUsersTestCase
         $this->assertNull($this->userService->getRoles()->getRoleByName("governmentSwami"));
         $roles->add($role);
         $hashedPassword = Hash::make("LoremIpsum");
-        $createdAt = new Carbon;
+        $createdAt = new DateTime;
         $user = new User;
         $user->setID(1);
         $user->setInitials('WTF');

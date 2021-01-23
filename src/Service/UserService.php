@@ -12,7 +12,7 @@ use Fifthgate\Objectivity\Users\Domain\Interfaces\UserInterface;
 use Fifthgate\Objectivity\Repositories\Service\AbstractRepositoryDrivenDomainEntityManagementService;
 use Illuminate\Support\Str;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\BannedEmailCollectionInterface;
-use Uuid;
+
 use Fifthgate\Objectivity\Core\Domain\Interfaces\DomainEntityInterface;
 
 class UserService extends AbstractRepositoryDrivenDomainEntityManagementService implements UserServiceInterface
@@ -157,6 +157,6 @@ class UserService extends AbstractRepositoryDrivenDomainEntityManagementService 
 
     public function generateOptOutToken(): string
     {
-        return Uuid::generate();
+        return Str::uuid();
     }
 }

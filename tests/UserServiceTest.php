@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 
 use Fifthgate\Objectivity\Users\Service\Interfaces\UserServiceInterface;
 use Fifthgate\Objectivity\Users\Domain\User;
-use Carbon\Carbon;
+use \DateTime;
 use Illuminate\Support\Facades\Hash;
 use \DateTimeInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserCollectionInterface;
@@ -71,7 +71,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
 
     public function testRetrieveByCredentials()
     {
-        $testStart = new Carbon;
+        $testStart = new DateTime;
         $user = $this->generateTestUser();
         $user = $this->userService->save($user);
         $id = $user->getID();
@@ -84,7 +84,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
 
     public function testUpdateRememberToken()
     {
-        $testStart = new Carbon;
+        $testStart = new DateTime;
         $user = $this->generateTestUser();
         $user = $this->userService->save($user);
         $this->userService->updateRememberToken($user, 'rememberToken');
@@ -94,7 +94,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
 
     public function testRetrieveByToken()
     {
-        $testStart = new Carbon;
+        $testStart = new DateTime;
         $user = $this->generateTestUser();
         $user = $this->userService->save($user);
         $id = $user->getID();
@@ -105,7 +105,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
 
     public function testValidateCredentials()
     {
-        $testStart = new Carbon;
+        $testStart = new DateTime;
         $user = $this->generateTestUser();
         $user = $this->userService->save($user);
         $this->assertTrue($this->userService->validateCredentials($user, ['password'=>'LoremIpsum']));
@@ -113,7 +113,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
 
     public function testFindAll()
     {
-        $testStart = new Carbon;
+        $testStart = new DateTime;
         $user = $this->generateTestUser();
         $user = $this->userService->save($user);
         $users = $this->userService->findAll();
@@ -126,7 +126,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
 
     public function testDelete()
     {
-        $testStart = new Carbon;
+        $testStart = new DateTime;
         $user = $this->generateTestUser();
         $user = $this->userService->save($user);
         $this->userService->delete($user);
@@ -138,7 +138,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $testPassword = "Test";
         $testName = "Test Name";
         $testEmailAddress = "probity@inaction.gov";
-        $createdAt = new Carbon;
+        $createdAt = new DateTime;
         $testRoles = $this->userService->getRoles()->filterByMachineNames(["shopper"]);
         $user = new User;
         $user->setPassword($testPassword);
