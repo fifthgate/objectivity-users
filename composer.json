@@ -21,9 +21,10 @@
         }
     },
     "require": {
-        "fifthgate/objectivity-core": "9999999-dev",
         "guzzlehttp/guzzle": "^7.2",
-        "fifthgate/objectivity-repos": "9999999-dev"
+        "fifthgate/objectivity-repos": "9999999-dev",
+        "fifthgate/objectivity-core": "9999999-dev"
+
     },
     "require-dev": {
         "phpunit/phpunit": "^9.3.3",
