@@ -14,8 +14,6 @@ class User extends AbstractDomainEntity implements UserInterface
 {
     use Notifiable;
 
-    protected $initials;
-
     protected $password;
 
     protected $rememberToken;
@@ -51,8 +49,6 @@ class User extends AbstractDomainEntity implements UserInterface
             case 'password':
                 return $this->getPassword();
                 break;
-            case 'initials':
-                return $this->getInitials();
                 break;
             default:
                 return null;
@@ -225,16 +221,6 @@ class User extends AbstractDomainEntity implements UserInterface
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
-    }
-
-    public function setInitials(string $initials)
-    {
-        $this->initials = $initials;
-    }
-
-    public function getInitials() : string
-    {
-        return $this->initials;
     }
 
     public function getEmailOptIn() : bool

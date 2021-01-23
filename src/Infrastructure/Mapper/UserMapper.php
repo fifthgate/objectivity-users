@@ -95,7 +95,6 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
         $user->setCookieAcceptanceStatus((bool) $result['has_cookie_consent']);
         $user->setCreatedAt(new Carbon($result['created_at']));
         $user->setUpdatedAt(new Carbon($result['updated_at']));
-        $user->setInitials($result["initials"]);
         $user->setOptOutToken($result['opt_out_token']);
         $user->setEmailOptIn((bool) $result['email_opt_in']);
         $user->setAPIToken($result['api_token'] ?? '');
@@ -147,7 +146,6 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
                 'is_activated' => $domainEntity->getIsActivated() ? 1 : 0,
                 'has_cookie_consent' => $domainEntity->getCookieAcceptanceStatus() ? 1 : 0,
                 'opt_out_token' => $domainEntity->getOptOutToken(),
-                "initials" => $domainEntity->getInitials(),
                 'email_opt_in' => (int) $domainEntity->getEmailOptIn(),
                 'api_token' => $domainEntity->getAPIToken()
             ]);
@@ -170,7 +168,6 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
                 'is_activated' => $domainEntity->getIsActivated() ? 1 : 0,
                 'has_cookie_consent' => $domainEntity->getCookieAcceptanceStatus() ? 1 : 0,
                 'opt_out_token' => $domainEntity->getOptOutToken(),
-                "initials" => $domainEntity->getInitials(),
                 'email_opt_in' => (int) $domainEntity->getEmailOptIn(),
                 'api_token' => $domainEntity->getAPIToken()
         ]);

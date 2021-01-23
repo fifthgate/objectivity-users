@@ -58,14 +58,13 @@ class UserTest extends ObjectivityUsersTestCase
     public function testUser()
     {
         $roles = new UserRoleCollection;
-        $role = $this->userService->getRoles()->getRoleByName("listWriter");
+        $role = $this->userService->getRoles()->getRoleByName("registered-user");
         $this->assertNull($this->userService->getRoles()->getRoleByName("governmentSwami"));
         $roles->add($role);
         $hashedPassword = Hash::make("LoremIpsum");
         $createdAt = new DateTime;
         $user = new User;
         $user->setID(1);
-        $user->setInitials('WTF');
         $user->setPassword($hashedPassword);
         $user->setRememberToken("rememberToken");
         $user->setName("Laura Ipsum");
@@ -81,10 +80,9 @@ class UserTest extends ObjectivityUsersTestCase
         $this->assertEquals($optOutToken, $user->getOptOutToken());
         $this->assertTrue($user->getCookieAcceptanceStatus());
         $this->assertEquals('LoremIpsum', $user->getAPIToken());
-        $this->assertEquals('WTF', $user->getInitials());
         $this->assertFalse($user->hasRole("admin"));
         $user->setRoles($roles);
-        $this->assertTrue($user->hasRole("listWriter"));
+        $this->assertTrue($user->hasRole("registered-user"));
         $this->assertEquals($user->getID(), 1);
         $this->assertFalse($user->getIsActivated());
         $user->setIsActivated(true);
@@ -94,7 +92,7 @@ class UserTest extends ObjectivityUsersTestCase
         $this->assertEquals($user->getRememberToken(), "rememberToken");
         $this->assertEquals($user->getName(), "Laura Ipsum");
         $this->assertEquals($user->getCreatedAt(), $createdAt);
-        $this->assertTrue($user->hasPermission("createShoppingList"));
+        $this->assertTrue($user->hasPermission("viewOwnAccount"));
         $this->assertFalse($user->hasPermission("ruleTheEntireUniverseWithAnIronFist"));
         $this->assertEquals($user->getUpdatedAt(), $createdAt);
         $this->assertEquals($user->getEmailAddress(), "lipsum@lipsum.com");
@@ -105,7 +103,6 @@ class UserTest extends ObjectivityUsersTestCase
         $this->assertEquals($user->name, $user->getName());
         $this->assertEquals($user->email, $user->getEmailAddress());
         $this->assertEquals($user->password, $user->getPassword());
-        $this->assertEquals($user->initials, $user->getInitials());
         $this->assertNull($user->roles);
         $this->assertEquals($user->getEmailForPasswordReset(), $user->getEmailAddress());
     }

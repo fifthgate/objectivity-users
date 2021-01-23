@@ -52,10 +52,6 @@ interface UserInterface extends Authenticatable, DomainEntityInterface, CanReset
 
     public function getOptOutToken() : ? string;
 
-    public function setInitials(string $initials);
-
-    public function getInitials() : string;
-
     public function getEmailOptIn() : bool;
 
     public function setEmailOptIn(bool $emailOptIn);

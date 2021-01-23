@@ -32,6 +32,7 @@ class UserServiceProvider extends ServiceProvider
             ],
             'objectivity-user-roles'
         );
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 
     /**

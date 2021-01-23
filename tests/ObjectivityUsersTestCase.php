@@ -19,7 +19,6 @@ abstract class ObjectivityUsersTestCase extends TestCase {
         $user->setName($overrides["name"] ?? 'Laura Ipsum');
         $user->setEmailAddress($overrides["email"] ?? 'lipsum@lauraipsum.com');
         $user->setCreatedAt($overrides["createdAt"] ?? new DateTime);
-        $user->setInitials($overrides["initials"] ?? "ini");
         $user->setUpdatedAt($overrides["updatedAt"] ?? new DateTime);
         $user->setRoles($overrides["roles"] ?? $this->userService->getRoles());
         $user->setIsActivated($overrides["is_activated"] ?? false);
@@ -52,6 +51,8 @@ abstract class ObjectivityUsersTestCase extends TestCase {
 	protected function setUp(): void {
 	    parent::setUp();
 	    $this->userService = $this->app->get(UserServiceInterface::class);
+	    $this->loadLaravelMigrations();
 	    $this->loadMigrationsFrom(__DIR__ . '/migrations');
+	    $this->artisan('migrate', ['--database' => 'testbench'])->run();
 	}
 }

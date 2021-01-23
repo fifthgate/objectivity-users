@@ -19,12 +19,11 @@ class UserServiceTest extends ObjectivityUsersTestCase
     public function testUserStores()
     {
         $app = $this->createApplication();
-        $user = $this->generateTestUser(["initials" => "WTH"]);
+        $user = $this->generateTestUser();
         $user = $this->userService->save($user);
         $this->assertDatabaseHas('users', [
             'email' => 'lipsum@lauraipsum.com',
             'name' => 'Laura Ipsum',
-            'initials' => 'WTH'
         ]);
         $this->assertNotNull($user->getID());
     }
@@ -139,7 +138,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $testName = "Test Name";
         $testEmailAddress = "probity@inaction.gov";
         $createdAt = new DateTime;
-        $testRoles = $this->userService->getRoles()->filterByMachineNames(["shopper"]);
+        $testRoles = $this->userService->getRoles()->filterByMachineNames(["registered-user"]);
         $user = new User;
         $user->setPassword($testPassword);
         $user->setName($testName);
@@ -149,7 +148,6 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $user->setCookieAcceptanceStatus(false);
         $user->setCreatedAt($createdAt);
         $user->setUpdatedAt($createdAt);
-        $user->setInitials("FML");
         $user->setAPIToken('LoremIpsum');
         $optOutToken = $this->userService->generateOptOutToken();
         $user->setOptOutToken($optOutToken);
@@ -158,7 +156,6 @@ class UserServiceTest extends ObjectivityUsersTestCase
 
         //Test failure condition.
         $this->assertEquals($optOutToken, $foundUser->getOptOutToken());
-        $this->assertEquals("FML", $foundUser->getInitials());
         $this->assertEquals("LoremIpsum", $foundUser->getAPIToken());
         $this->assertEquals($testPassword, $foundUser->getPassword());
         $this->assertEquals($testRoles->count(), $foundUser->getRoles()->count());
