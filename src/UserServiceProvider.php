@@ -22,10 +22,11 @@ class UserServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
+    {   //@codeCoverageIgnoreStart
         $this->app['auth']->provider('userService', function () {
             return $this->app->get(UserServiceInterface::class);
         });
+        //@codeCoverageIgnoreEnd
         $this->publishes(
             [
                 __DIR__.'/../config/objectivity-user-roles.php' => config_path('objectivity-user-roles.php'),

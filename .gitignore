@@ -1,4 +1,5 @@
 /vendor/
 .phpunit.result.cache
 reports
+/reports/
 composer.lock
