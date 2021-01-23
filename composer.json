@@ -1,0 +1,38 @@
+{
+    "name": "fifthgate/objectivity-users",
+    "description": "A Domain-Driven Users package for Laravel 8",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sam Baynham",
+            "email": "sam@fifthgate.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Fifthgate\\Objectivity\\Users\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fifthgate\\Objectivity\\Users\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "fifthgate/objectivity-core": "9999999-dev",
+        "guzzlehttp/guzzle": "^7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3.3",
+        "orchestra/testbench": "9999999-dev",
+        "orchestra/testbench-browser-kit": "9999999-dev"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/fifthgate/objectivity-core"
+        }
+    ]
+}
