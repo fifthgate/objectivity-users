@@ -5,9 +5,25 @@ namespace Fifthgate\Objectivity\Users\Tests;
 use Orchestra\Testbench\TestCase;
 
 use Fifthgate\Objectivity\Users\UserServiceProvider;
-
+use Fifthgate\Objectivity\Users\Service\Interfaces\UserServiceInterface;
 
 abstract class ObjectivityUsersTestCase extends TestCase {
+
+	protected function generateTestUser(array $overrides = [])
+    {
+        $user = new User;
+        $user->setPassword(Hash::make($overrides["password"] ?? 'LoremIpsum'));
+        $user->setName($overrides["name"] ?? 'Laura Ipsum');
+        $user->setEmailAddress($overrides["email"] ?? 'lipsum@lauraipsum.com');
+        $user->setCreatedAt($overrides["createdAt"] ?? new Carbon);
+        $user->setInitials($overrides["initials"] ?? "ini");
+        $user->setUpdatedAt($overrides["updatedAt"] ?? new Carbon);
+        $user->setRoles($overrides["roles"] ?? $this->userService->getRoles());
+        $user->setIsActivated($overrides["is_activated"] ?? false);
+        $user->setCookieAcceptanceStatus($overrides["cookie_acceptance_status"] ?? false);
+        $user->setAPIToken($overrides["api_token"] ?? Str::random(60));
+        return $user;
+    }
 
   	protected function getPackageProviders($app) {
 	    return [
@@ -33,6 +49,7 @@ abstract class ObjectivityUsersTestCase extends TestCase {
 	 */
 	protected function setUp(): void {
 	    parent::setUp();
+	    $this->userService = $this->app->get(UserServiceInterface::class);
 		//$this->menuService = $this->app->get(MenuServiceInterface::class);
 	}
 }

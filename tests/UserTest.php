@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Featurez\Users;
+namespace Fifthgate\Objectivity\Users\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;

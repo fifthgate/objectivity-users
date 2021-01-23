@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Users;
+namespace Fifthgate\Objectivity\Users\Tests;
 
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
