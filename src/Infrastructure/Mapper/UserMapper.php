@@ -11,7 +11,7 @@ use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionI
 use Fifthgate\Objectivity\Users\Domain\Collection\UserRoleCollection;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserCollectionInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\UserCollection;
-use Fifthgate\Objectivity\Core\Infrastructure\Mapper\AbstractDomainEntityMapper;
+use Fifthgate\Objectivity\Repositories\Infrastructure\Mapper\AbstractDomainEntityMapper;
 use Fifthgate\Objectivity\Core\Domain\Collection\Interfaces\DomainEntityCollectionInterface;
 use Fifthgate\Objectivity\Core\Domain\Interfaces\DomainEntityInterface;
 

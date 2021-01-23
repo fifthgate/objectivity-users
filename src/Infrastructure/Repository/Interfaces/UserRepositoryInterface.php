@@ -1,11 +1,11 @@
 <?php
 
-namespace Services\User\Infrastructure\Repository\Interfaces;
+namespace Fifthgate\Objectivity\Users\Infrastructure\Repository\Interfaces;
 
-use Services\User\Domain\Interfaces\UserInterface;
-use Services\User\Domain\Collection\Interfaces\UserCollectionInterface;
-use Services\Core\Infrastructure\Repository\Interfaces\DomainEntityRepositoryInterface;
-use Services\User\Domain\Collection\Interfaces\BannedEmailCollectionInterface;
+use Fifthgate\Objectivity\Users\Domain\Interfaces\UserInterface;
+use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserCollectionInterface;
+use Fifthgate\Objectivity\Repositories\Infrastructure\Repository\Interfaces\DomainEntityRepositoryInterface;
+use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\BannedEmailCollectionInterface;
 
 interface UserRepositoryInterface extends DomainEntityRepositoryInterface
 {

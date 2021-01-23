@@ -1,8 +1,8 @@
 <?php
 
-namespace Fifthgate\Objectivity\Objectivity\User\Infrastructure\Mapper\Interfaces;
+namespace Fifthgate\Objectivity\Users\Infrastructure\Mapper\Interfaces;
 
-use Fifthgate\Objectivity\Objectivity\User\Domain\Collection\Interfaces\BannedEmailCollectionInterface;
+use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\BannedEmailCollectionInterface;
 
 interface BannedEmailsMapperInterface
 {

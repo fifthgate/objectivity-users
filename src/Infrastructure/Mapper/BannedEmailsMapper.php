@@ -8,7 +8,7 @@ use Fifthgate\Objectivity\Users\Domain\BannedEmailAddress;
 use Carbon\Carbon;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\BannedEmailCollectionInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\BannedEmailsCollection;
-use Fifthgate\Objectivity\Core\Infrastructure\Mapper\AbstractDomainEntityMapper;
+use Fifthgate\Objectivity\Repositories\Infrastructure\Mapper\AbstractDomainEntityMapper;
 use Fifthgate\Objectivity\Core\Domain\Collection\Interfaces\DomainEntityCollectionInterface;
 use Fifthgate\Objectivity\Core\Domain\Interfaces\DomainEntityInterface;
 

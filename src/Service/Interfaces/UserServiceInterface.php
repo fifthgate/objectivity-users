@@ -8,7 +8,7 @@ use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserCollectionInter
 use Fifthgate\Objectivity\Users\Domain\Interfaces\UserInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionInterface;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
-use Fifthgate\Objectivity\Core\Service\Interfaces\DomainEntityManagementServiceInterface;
+use Fifthgate\Objectivity\Repositories\Service\Interfaces\DomainEntityManagementServiceInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\BannedEmailCollectionInterface;
 
 interface UserServiceInterface extends UserProvider, DomainEntityManagementServiceInterface

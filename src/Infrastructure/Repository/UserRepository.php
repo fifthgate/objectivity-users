@@ -1,15 +1,15 @@
 <?php
 
-namespace Services\User\Infrastructure\Repository;
+namespace Fifthgate\Objectivity\Users\Infrastructure\Repository;
 
-use Services\User\Infrastructure\Repository\Interfaces\UserRepositoryInterface;
-use Services\User\Infrastructure\Mapper\Interfaces\UserMapperInterface;
-use Services\User\Infrastructure\Mapper\Interfaces\BannedEmailsMapperInterface;
-use Services\User\Domain\Interfaces\UserInterface;
-use Services\User\Domain\Collection\Interfaces\UserCollectionInterface;
-use Services\Core\Infrastructure\Repository\AbstractDomainEntityRepository;
-use Services\User\Domain\Collection\Interfaces\BannedEmailCollectionInterface;
-use Services\User\Domain\BannedEmailAddress;
+use Fifthgate\Objectivity\Users\Infrastructure\Repository\Interfaces\UserRepositoryInterface;
+use Fifthgate\Objectivity\Users\Infrastructure\Mapper\Interfaces\UserMapperInterface;
+use Fifthgate\Objectivity\Users\Infrastructure\Mapper\Interfaces\BannedEmailsMapperInterface;
+use Fifthgate\Objectivity\Users\Domain\Interfaces\UserInterface;
+use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserCollectionInterface;
+use Fifthgate\Objectivity\Repositories\Infrastructure\Repository\AbstractDomainEntityRepository;
+use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\BannedEmailCollectionInterface;
+use Fifthgate\Objectivity\Users\Domain\BannedEmailAddress;
 
 class UserRepository extends AbstractDomainEntityRepository implements UserRepositoryInterface
 {

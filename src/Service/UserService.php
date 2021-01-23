@@ -9,7 +9,7 @@ use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserCollectionInterface;
 use Fifthgate\Objectivity\Users\Domain\Interfaces\UserInterface;
-use Fifthgate\Objectivity\Core\Service\AbstractRepositoryDrivenDomainEntityManagementService;
+use Fifthgate\Objectivity\Repositories\Service\AbstractRepositoryDrivenDomainEntityManagementService;
 use Illuminate\Support\Str;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\BannedEmailCollectionInterface;
 use Uuid;
