@@ -26,6 +26,12 @@ class UserServiceProvider extends ServiceProvider
         $this->app['auth']->provider('userService', function () {
             return $this->app->get(UserServiceInterface::class);
         });
+        $this->publishes(
+            [
+                __DIR__.'/../config/objectivity-user-roles.php' => config_path('objectivity-user-roles.php'),
+            ],
+            'objectivity-user-roles'
+        );
     }
 
     /**
@@ -35,11 +41,16 @@ class UserServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/objectivity-user-roles.php',
+            'objectivity-user-roles'
+        );
+
         $this->app->singleton(
             UserRoleCollectionInterface::class,
             function ($app) {
                 $rolesFactory = new UserRolesFactory;
-                return $rolesFactory(env('APP_DEBUG', false));
+                return $rolesFactory(config('app.debug', false));
             }
         );
         $this->app->bind(

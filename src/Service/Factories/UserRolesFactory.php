@@ -27,8 +27,8 @@ class UserRolesFactory
         if (!$rolesCollection or $testMode) {
             $date = new Carbon;
             Log::info("Role cache rebuilt at {$date}");
-            $roleConfig = File::get(base_path().'/services/User/Service/Config/roles.json');
-            $rolesArray = json_decode($roleConfig, true);
+            
+            $rolesArray = config('objectivity-user-roles');
             foreach ($rolesArray as $roleMachineName => $roleDefinitionArray) {
                 $this->validateRole($roleMachineName, $roleDefinitionArray);
             }
