@@ -40,5 +40,12 @@
             "type": "vcs",
             "url": "https://github.com/fifthgate/objectivity-repos"
         }
-    ]
+    ],
+     "extra": {
+        "laravel": {
+            "providers": [
+                "Fifthgate\\Objectivity\\Users\\UserServiceProvider"
+            ]
+        }
+    }
 }
