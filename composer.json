@@ -22,8 +22,8 @@
     },
     "require": {
         "guzzlehttp/guzzle": "^7.2",
-        "fifthgate/objectivity-repos": "9999999-dev",
-        "fifthgate/objectivity-core": "9999999-dev"
+        "fifthgate/objectivity-repos": "^v0.1.9.2",
+        "fifthgate/objectivity-core": "^v0.1.2"
 
     },
     "require-dev": {

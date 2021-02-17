@@ -18,9 +18,9 @@ interface UserInterface extends Authenticatable, DomainEntityInterface, CanReset
 
     public function hasPermission(string $permissionName) : bool;
 
-    public function setID(int $id);
+    public function setID($id);
 
-    public function getID() : ? int;
+    public function getID();
 
     public function setPassword(string $password);
 
