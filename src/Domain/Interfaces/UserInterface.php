@@ -7,7 +7,6 @@ use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionI
 use \DateTimeInterface;
 use Fifthgate\Objectivity\Core\Domain\Interfaces\DomainEntityInterface;
 
-
 interface UserInterface extends Authenticatable, DomainEntityInterface
 {
     public function hasRole(string $roleName) : bool;
@@ -56,7 +55,7 @@ interface UserInterface extends Authenticatable, DomainEntityInterface
 
     public function setEmailOptIn(bool $emailOptIn);
 
-    public function getAPIToken() : string;
+    public function getAPIToken() : ? string;
 
     public function setAPIToken(string $apiToken);
 }

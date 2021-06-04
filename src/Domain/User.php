@@ -196,9 +196,9 @@ class User extends AbstractDomainEntity implements UserInterface
     }
 
 
-    public function getAPIToken() : string
+    public function getAPIToken() : ? string
     {
-        return $this->apiToken;
+        return isset($this->apiToken) ? $this->apiToken : null;
     }
 
     public function setAPIToken(string $apiToken)
