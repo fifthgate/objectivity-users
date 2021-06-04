@@ -3,8 +3,9 @@
 namespace Fifthgate\Objectivity\Users\Domain\ValueObjects;
 
 use Fifthgate\Objectivity\Users\Domain\ValueObjects\Interfaces\UserRoleInterface;
+use Fifthgate\Objectivity\Core\Domain\AbstractDomainEntity;
 
-class UserRole implements UserRoleInterface
+class UserRole extends AbstractDomainEntity implements UserRoleInterface
 {
     private string $machineName;
 

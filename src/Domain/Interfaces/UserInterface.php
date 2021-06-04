@@ -6,9 +6,9 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionInterface;
 use \DateTimeInterface;
 use Fifthgate\Objectivity\Core\Domain\Interfaces\DomainEntityInterface;
-use Illuminate\Contracts\Auth\CanResetPassword;
 
-interface UserInterface extends Authenticatable, DomainEntityInterface, CanResetPassword
+
+interface UserInterface extends Authenticatable, DomainEntityInterface
 {
     public function hasRole(string $roleName) : bool;
 

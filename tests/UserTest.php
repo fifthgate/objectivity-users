@@ -5,6 +5,8 @@ namespace Fifthgate\Objectivity\Users\Tests;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Fifthgate\Objectivity\Users\Domain\User;
+use Fifthgate\Objectivity\Users\Domain\LaravelUser;
+
 use Fifthgate\Objectivity\Users\Service\Interfaces\UserServiceInterface;
 use Illuminate\Support\Facades\Hash;
 use \DateTime;
@@ -63,7 +65,7 @@ class UserTest extends ObjectivityUsersTestCase
         $roles->add($role);
         $hashedPassword = Hash::make("LoremIpsum");
         $createdAt = new DateTime;
-        $user = new User;
+        $user = new LaravelUser;
         $user->setID(1);
         $user->setPassword($hashedPassword);
         $user->setRememberToken("rememberToken");

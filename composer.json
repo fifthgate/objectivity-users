@@ -22,14 +22,13 @@
     },
     "require": {
         "guzzlehttp/guzzle": "^7.2",
-        "fifthgate/objectivity-repos": "^v0.1.9.2",
-        "fifthgate/objectivity-core": "^v0.1.2"
+        "fifthgate/objectivity-repos": "^v0.2.2",
+        "fifthgate/objectivity-core": "^v0.2.4"
 
     },
     "require-dev": {
         "phpunit/phpunit": "^9.3.3",
-        "orchestra/testbench": "9999999-dev",
-        "orchestra/testbench-browser-kit": "9999999-dev"
+        "orchestra/testbench": "7.0.x-dev"
     },
     "repositories": [
         {

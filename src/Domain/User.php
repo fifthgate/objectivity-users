@@ -8,11 +8,9 @@ use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionI
 use Fifthgate\Objectivity\Core\Domain\AbstractDomainEntity;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 
 class User extends AbstractDomainEntity implements UserInterface
 {
-    use Notifiable;
 
     protected $password;
 
@@ -34,26 +32,6 @@ class User extends AbstractDomainEntity implements UserInterface
 
     protected bool $emailOptIn = false;
 
-    /**
-     * Laravel's password reset system expects to be able to access some properties as though they were public. Le sigh.
-     */
-    public function __get(string $name)
-    {
-        switch ($name) {
-            case 'name':
-                return $this->getName();
-                break;
-            case 'email':
-                return $this->getEmailAddress();
-                break;
-            case 'password':
-                return $this->getPassword();
-                break;
-                break;
-            default:
-                return null;
-        }
-    }
     /**
      * Get the name of the unique identifier for the user.
      *
@@ -83,7 +61,6 @@ class User extends AbstractDomainEntity implements UserInterface
     {
         return $this->password;
     }
-
 
     public function setName(string $name)
     {
@@ -206,21 +183,6 @@ class User extends AbstractDomainEntity implements UserInterface
     public function getOptOutToken() : ? string
     {
         return isset($this->optOutToken) ? $this->optOutToken : null;
-    }
-
-    public function getEmailForPasswordReset()
-    {
-        return $this->getEmailAddress();
-    }
-
-    /**
-     * @codeCoverageIgnore
-     *
-     * This is a straight carbon-copy of Laravel's system, for compatibility only.
-     */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetPasswordNotification($token));
     }
 
     public function getEmailOptIn() : bool
