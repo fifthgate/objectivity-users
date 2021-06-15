@@ -165,6 +165,32 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $this->assertTrue($foundUser->getIsActivated());
     }
 
+    public function testLackOfOptOutToken()
+    {
+        $testPassword = "Test";
+        $testName = "Test Name";
+        $testEmailAddress = "probity@inaction.gov";
+        $createdAt = new DateTime;
+        $testRoles = $this->userService->getRoles()->filterByMachineNames(["registered-user"]);
+        $user = new User;
+        $user->setPassword($testPassword);
+        $user->setName($testName);
+        $user->setEmailAddress($testEmailAddress);
+        $user->setRoles($testRoles);
+        $user->setIsActivated(true);
+        $user->setCookieAcceptanceStatus(false);
+        $user->setCreatedAt($createdAt);
+        $user->setUpdatedAt($createdAt);
+        $user->setAPIToken('LoremIpsum');
+        
+        $user = $this->userService->save($user);
+        $foundUser = $this->userService->find($user->getID());
+        
+        $this->assertNotNull($foundUser->getOptOutToken());
+
+    }
+
+
     public function testBanSystem()
     {
         $bannedEmail = "nogoodnik@shadyrussianbotfactory.com";

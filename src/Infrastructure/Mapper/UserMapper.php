@@ -95,7 +95,9 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
         $user->setCookieAcceptanceStatus((bool) $result['has_cookie_consent']);
         $user->setCreatedAt(new Carbon($result['created_at']));
         $user->setUpdatedAt(new Carbon($result['updated_at']));
-        $user->setOptOutToken($result['opt_out_token']);
+        if ($result['opt_out_token']) {
+            $user->setOptOutToken($result['opt_out_token']);
+        }
         $user->setEmailOptIn((bool) $result['email_opt_in']);
         $user->setAPIToken($result['api_token'] ?? '');
         return $user;
