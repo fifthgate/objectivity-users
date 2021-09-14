@@ -13,12 +13,15 @@ class BannedEmails extends Migration
      */
     public function up()
     {
-        Schema::create('banned_emails', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('email')->unique();
-            $table->string('ban_reason');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('banned_emails')) {
+            Schema::create('banned_emails', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('email')->unique();
+                $table->string('ban_reason');
+                $table->timestamps();
+            });    
+        }
+        
     }
 
     /**

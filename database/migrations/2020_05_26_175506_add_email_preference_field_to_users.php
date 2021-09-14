@@ -13,9 +13,11 @@ class AddEmailPreferenceFieldToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('email_opt_in')->default(0);
-        });
+        if (!Schema::hasColumn('users', 'email_opt_in')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->boolean('email_opt_in')->default(0);
+            });
+        }
     }
 
     /**

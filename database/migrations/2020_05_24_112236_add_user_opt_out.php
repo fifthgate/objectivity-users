@@ -13,9 +13,11 @@ class AddUserOptOut extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('opt_out_token')->unique()->nullable();
-        });
+        if (!Schema::hasColumn('users', 'opt_out_token')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->string('opt_out_token')->unique()->nullable();
+            });
+        }
     }
 
     /**

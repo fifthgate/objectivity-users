@@ -13,16 +13,27 @@ class RBACMigration extends Migration
      */
     public function up()
     {
-        Schema::create('user_roles', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('role_name', 255);
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_activated')->default(0);
-            $table->boolean('has_cookie_consent')->default(0);
-        });
+        if (!Schema::hasTable('user_roles')) {
+            Schema::create('user_roles', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('role_name', 255);
+                $table->bigInteger('user_id')->unsigned();
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            });    
+        }
+        
+        if (!Schema::hasColumn('users', 'is_activated')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->boolean('is_activated')->default(0);
+            });    
+        }
+
+        if (!Schema::hasColumn('users', 'has_cookie_consent')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->boolean('has_cookie_consent')->default(0);
+            });    
+        }
+        
     }
 
     /**
