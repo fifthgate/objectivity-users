@@ -22,7 +22,7 @@
     },
     "require": {
         "guzzlehttp/guzzle": "^7.2",
-        "fifthgate/objectivity-repos": "^v0.2.4",
+        "fifthgate/objectivity-repos": "^v0.2.5",
         "fifthgate/objectivity-core": "^v0.3.0.0"
 
     },
