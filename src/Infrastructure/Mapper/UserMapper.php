@@ -178,14 +178,14 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
         return $domainEntity;
     }
 
-    private function purgeRolesForUser(UserInterface $user)
+    protected function purgeRolesForUser(UserInterface $user)
     {
         $this->db->table('user_roles')
             ->where('user_id', '=', $user->getID())
             ->delete();
     }
 
-    private function insertRolesForUser(UserInterface $user)
+    protected function insertRolesForUser(UserInterface $user)
     {
         if ($user->getRoles()) {
             foreach ($user->getRoles() as $role) {
