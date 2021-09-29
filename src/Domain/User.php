@@ -5,11 +5,11 @@ namespace Fifthgate\Objectivity\Users\Domain;
 use Fifthgate\Objectivity\Users\Domain\Interfaces\UserInterface;
 use \DateTimeInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionInterface;
-use Fifthgate\Objectivity\Core\Domain\AbstractDomainEntity;
+use Fifthgate\Objectivity\Core\Domain\AbstractSerializableDomainEntity;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Notifications\Notifiable;
 
-class User extends AbstractDomainEntity implements UserInterface
+class User extends AbstractSerializableDomainEntity implements UserInterface
 {
 
     protected $password;
