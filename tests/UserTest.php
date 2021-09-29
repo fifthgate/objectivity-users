@@ -114,4 +114,30 @@ class UserTest extends ObjectivityUsersTestCase
         $permissions = $this->userService->getRoles()->getAllPermissions();
         $this->assertTrue(is_array($permissions));
     }
+
+    public function testUserSerialization()
+    {
+        $roles = new UserRoleCollection;
+        $role = $this->userService->getRoles()->getRoleByName("registered-user");
+        $roles->add($role);
+        $hashedPassword = Hash::make("LoremIpsum");
+        $createdAt = new DateTime;
+        $user = new LaravelUser;
+        $user->setID(1);
+        $user->setPassword($hashedPassword);
+        $user->setRememberToken("rememberToken");
+        $user->setName("Laura Ipsum");
+        $user->setCreatedAt($createdAt);
+        $user->setUpdatedAt($createdAt);
+        $user->setEmailAddress("lipsum@lipsum.com");
+        $user->setCookieAcceptanceStatus(true);
+        $user->setAPIToken('LoremIpsum');
+        $optOutToken = $this->userService->generateOptOutToken();
+        $user->setOptOutToken($optOutToken);
+
+        $output = $user->jsonSerialize();
+        
+        $this->assertFalse(isset($output['password']));
+        $this->assertFalse(isset($output['remember_token']));
+    }
 }

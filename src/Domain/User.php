@@ -205,4 +205,25 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
     {
         $this->apiToken = $apiToken;
     }
+
+    /**
+     * Serialize the object to an array.
+     *
+     * @return array An array of object variables, based on get methods.
+     */
+    public function jsonSerialize($excludedMethods = [])
+    {
+        //This would only get the cryptographic hash of the password, but we're still better not to expose it, even over a secured connection.
+        $securityExcludedMethods = [
+            "getPassword",
+            "getRememberToken"
+        ];
+        foreach ($securityExcludedMethods as $securityExcludedMethod) {
+            if (!in_array($securityExcludedMethods, $excludedMethods)) {
+                $excludedMethods[] = $securityExcludedMethod;
+            }
+        }
+        
+        return parent::jsonSerialize($excludedMethods);
+    }
 }
