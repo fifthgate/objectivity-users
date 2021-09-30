@@ -13,6 +13,7 @@ use Fifthgate\Objectivity\Users\Service\Factories\UserRolesFactory;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionInterface;
 use Fifthgate\Objectivity\Users\Infrastructure\Mapper\Interfaces\BannedEmailsMapperInterface;
 use Fifthgate\Objectivity\Users\Infrastructure\Mapper\BannedEmailsMapper;
+use Fifthgate\Objectivity\Users\Http\Middleware\RBACAuthenticateMiddleware;
 
 class UserServiceProvider extends ServiceProvider
 {
@@ -22,7 +23,8 @@ class UserServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {   //@codeCoverageIgnoreStart
+    {
+        //@codeCoverageIgnoreStart
         $this->app['auth']->provider('userService', function () {
             return $this->app->get(UserServiceInterface::class);
         });
@@ -34,6 +36,7 @@ class UserServiceProvider extends ServiceProvider
             'objectivity-user-roles'
         );
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->app->make('router')->aliasMiddleware('auth.rbac', RBACAuthenticate::class);
     }
 
     /**
