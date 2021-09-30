@@ -1,6 +1,6 @@
 <?php
 
-namespace Fifthgate\Objectivity\Users\Tests;
+namespace Fifthgate\Objectivity\Users\Tests\Functional;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;

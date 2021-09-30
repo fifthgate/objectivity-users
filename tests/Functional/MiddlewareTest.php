@@ -1,6 +1,6 @@
 <?php
 
-namespace Fifthgate\Objectivity\Users\Tests;
+namespace Fifthgate\Objectivity\Users\Tests\Functional;
 
 use Fifthgate\Objectivity\Users\Tests\ObjectivityUsersTestCase;
 use Illuminate\Http\Request;
