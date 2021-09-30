@@ -216,7 +216,10 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         //This would only get the cryptographic hash of the password, but we're still better not to expose it, even over a secured connection.
         $securityExcludedMethods = [
             "getPassword",
-            "getRememberToken"
+            "getRememberToken",
+            "getAuthPassword",
+            "getAuthIdentifierName",
+            "getAuthIdentifier"
         ];
         foreach ($securityExcludedMethods as $securityExcludedMethod) {
             if (!in_array($securityExcludedMethods, $excludedMethods)) {
