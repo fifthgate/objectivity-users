@@ -7,7 +7,7 @@ use Closure;
 use Response;
 use Illuminate\Contracts\Auth\Factory as Auth;
 
-class RBACAuthenticateMiddleware extends Middleware
+class UserHasRoleMiddleware extends Middleware
 {
   
     /**
@@ -37,8 +37,8 @@ class RBACAuthenticateMiddleware extends Middleware
      */
     public function handle($request, Closure $next, ...$guards)
     {
-        $requestedPermission = reset($guards);
-        if (!$request->user() or !$request->user()->hasPermission($requestedPermission)) {
+        $role = reset($guards);
+        if (!$request->user() or !$request->user()->hasRole($role)) {
             return response()->json(["message" => "access_denied"], 403);
         }
 

@@ -36,8 +36,6 @@ class UserServiceProvider extends ServiceProvider
             'objectivity-user-roles'
         );
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
-        //$this->app->make('router')->aliasMiddleware('auth.rbac', RBACAuthenticate::class);
     }
 
     /**
