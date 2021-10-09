@@ -10,6 +10,7 @@ use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionI
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 use Fifthgate\Objectivity\Repositories\Service\Interfaces\DomainEntityManagementServiceInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\BannedEmailCollectionInterface;
+use Fifthgate\Objectivity\Users\Domain\Interfaces\LaravelUserInterface;
 
 interface UserServiceInterface extends UserProvider, DomainEntityManagementServiceInterface
 {
@@ -25,7 +26,11 @@ interface UserServiceInterface extends UserProvider, DomainEntityManagementServi
 
     public function getBannedEmails() : BannedEmailCollectionInterface;
 
+    public function getBanReason(string $emailAddress) : ? string;
+
     public function emailIsBanned(string $emailAddress) : bool;
 
     public function generateOptOutToken(): string;
+
+    public function generateLaravelCompatibleUser(UserInterface $user) : LaravelUserInterface;
 }

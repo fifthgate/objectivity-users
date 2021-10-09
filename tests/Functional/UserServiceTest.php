@@ -13,6 +13,7 @@ use \DateTimeInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserCollectionInterface;
 use Fifthgate\Objectivity\Users\Domain\Interfaces\UserInterface;
 use Fifthgate\Objectivity\Users\Tests\ObjectivityUsersTestCase;
+use Fifthgate\Objectivity\Users\Domain\Interfaces\LaravelUserInterface;
 
 class UserServiceTest extends ObjectivityUsersTestCase
 {
@@ -187,7 +188,6 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $foundUser = $this->userService->find($user->getID());
         
         $this->assertNotNull($foundUser->getOptOutToken());
-
     }
 
 
@@ -195,6 +195,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
     {
         $bannedEmail = "nogoodnik@shadyrussianbotfactory.com";
         $bannedReason = "Is a nogoodnik from a shady Russian bot factory";
+        $this->assertNull($this->userService->getBanReason($bannedEmail));
         $this->userService->banEmail($bannedEmail, $bannedReason);
         $this->assertTrue($this->userService->emailIsBanned($bannedEmail));
         $hasBanned = false;
@@ -204,5 +205,40 @@ class UserServiceTest extends ObjectivityUsersTestCase
             }
         }
         $this->assertTrue($hasBanned);
+        $this->assertEquals($bannedReason, $this->userService->getBanReason($bannedEmail));
+    }
+
+    public function testGenerateLaravelCompatibleUser()
+    {
+        $testPassword = "Test";
+        $testName = "Test Name";
+        $testEmailAddress = "probity@inaction.gov";
+        $createdAt = new DateTime;
+        $testRoles = $this->userService->getRoles()->filterByMachineNames(["registered-user"]);
+        $user = new User;
+        $user->setPassword($testPassword);
+        $user->setName($testName);
+        $user->setEmailAddress($testEmailAddress);
+        $user->setRoles($testRoles);
+        $user->setIsActivated(true);
+        $user->setCookieAcceptanceStatus(false);
+        $user->setCreatedAt($createdAt);
+        $user->setUpdatedAt($createdAt);
+        $user->setAPIToken('LoremIpsum');
+        $optOutToken = $this->userService->generateOptOutToken();
+        $user->setOptOutToken($optOutToken);
+        $user = $this->userService->save($user);
+
+        $laravelUser = $this->userService->generateLaravelCompatibleUser($user);
+        $this->assertTrue($laravelUser instanceof LaravelUserInterface);
+        $this->assertEquals($user->getID(), $laravelUser->getID());
+        $this->assertEquals($user->getPassword(), $laravelUser->getPassword());
+        $this->assertEquals($user->getEmailAddress(), $laravelUser->getEmailAddress());
+
+        $this->assertEquals($user->getEmailAddress(), $laravelUser->getEmailForPasswordReset());
+        $this->assertEquals($user->getName(), $laravelUser->name);
+        $this->assertEquals($user->getEmailAddress(), $laravelUser->email);
+        $this->assertEquals($user->getPassword(), $laravelUser->password);
+        $this->assertNull($laravelUser->someotherpropertythatdoesntexist);
     }
 }

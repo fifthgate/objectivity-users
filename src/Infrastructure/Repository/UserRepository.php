@@ -56,4 +56,13 @@ class UserRepository extends AbstractDomainEntityRepository implements UserRepos
         ]);
         return (bool) $result;
     }
+
+    public function getBanReason(string $emailAddress) : ? string
+    {
+        $result = $this->bannedEmailsMapper->queryOne([
+            'email' => $emailAddress
+        ]);
+
+        return $result ? $result->getBanReason() : null;
+    }
 }

@@ -6,13 +6,14 @@ use Fifthgate\Objectivity\Users\Domain\User;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 use Fifthgate\Objectivity\Users\Domain\Interfaces\LaravelUserInterface;
+use Fifthgate\Objectivity\Users\Domain\Interfaces\UserInterface;
+use Fifthgate\Objectivity\Users\Domain\Interfaces\MakesLaravelUserFromUser;
 
 /**
  * Compatibility Decorator for User
  */
-class LaravelUser extends User implements LaravelUserInterface
+class LaravelUser extends User implements LaravelUserInterface, MakesLaravelUserFromUser
 {
-
     use Notifiable;
 
     /**
@@ -50,5 +51,18 @@ class LaravelUser extends User implements LaravelUserInterface
             default:
                 return null;
         }
+    }
+
+    public static function makeFromUser(UserInterface $user) : LaravelUserInterface
+    {
+        $laravelUser = new self;
+        if ($user->getID()) {
+            $laravelUser->setID($user->getID());
+        }
+        $laravelUser->setName($user->getName());
+        $laravelUser->setPassword($user->getPassword());
+        $laravelUser->setName($user->getName());
+        $laravelUser->setEmailAddress($user->getEmailAddress());
+        return $laravelUser;
     }
 }

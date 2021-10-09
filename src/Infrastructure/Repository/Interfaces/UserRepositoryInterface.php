@@ -18,4 +18,6 @@ interface UserRepositoryInterface extends DomainEntityRepositoryInterface
     public function getBannedEmails() : BannedEmailCollectionInterface;
 
     public function emailIsBanned(string $emailAddress) : bool;
+
+    public function getBanReason(string $emailAddress) : ? string;
 }

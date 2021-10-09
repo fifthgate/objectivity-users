@@ -12,8 +12,9 @@ use Fifthgate\Objectivity\Users\Domain\Interfaces\UserInterface;
 use Fifthgate\Objectivity\Repositories\Service\AbstractRepositoryDrivenDomainEntityManagementService;
 use Illuminate\Support\Str;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\BannedEmailCollectionInterface;
-
+use Fifthgate\Objectivity\Users\Domain\Interfaces\LaravelUserInterface;
 use Fifthgate\Objectivity\Core\Domain\Interfaces\DomainEntityInterface;
+use Fifthgate\Objectivity\Users\Domain\LaravelUser;
 
 class UserService extends AbstractRepositoryDrivenDomainEntityManagementService implements UserServiceInterface
 {
@@ -155,8 +156,18 @@ class UserService extends AbstractRepositoryDrivenDomainEntityManagementService 
         return $this->repository->emailIsBanned($emailAddress);
     }
 
+    public function getBanReason(string $emailAddress) : ? string
+    {
+        return $this->repository->getBanReason($emailAddress);
+    }
+
     public function generateOptOutToken(): string
     {
         return Str::uuid();
+    }
+
+    public function generateLaravelCompatibleUser(UserInterface $user) : LaravelUserInterface
+    {
+        return LaravelUser::makeFromUser($user);
     }
 }
