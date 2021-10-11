@@ -63,6 +63,8 @@ class LaravelUser extends User implements LaravelUserInterface, MakesLaravelUser
         $laravelUser->setPassword($user->getPassword());
         $laravelUser->setName($user->getName());
         $laravelUser->setEmailAddress($user->getEmailAddress());
+        $laravelUser->setCreatedAt($user->getCreatedAt());
+        $laravelUser->setUpdatedAt($user->getUpdatedAt());
         return $laravelUser;
     }
 }

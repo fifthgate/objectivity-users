@@ -240,5 +240,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $this->assertEquals($user->getEmailAddress(), $laravelUser->email);
         $this->assertEquals($user->getPassword(), $laravelUser->password);
         $this->assertNull($laravelUser->someotherpropertythatdoesntexist);
+        $this->assertEquals($user->getCreatedAt(), $laravelUser->getCreatedAt());
+        $this->assertEquals($user->getUpdatedAt(), $laravelUser->getUpdatedAt());
     }
 }
