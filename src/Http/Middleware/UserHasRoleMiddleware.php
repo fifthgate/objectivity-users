@@ -37,8 +37,27 @@ class UserHasRoleMiddleware extends Middleware
      */
     public function handle($request, Closure $next, ...$guards)
     {
-        $role = reset($guards);
-        if (!$request->user() or !$request->user()->hasRole($role)) {
+        $roleString = reset($guards);
+        
+        if (strpos($roleString, ",") !== false) {
+            $roles = explode(",", $roleString);
+        } else {
+            $roles = [
+                0 => $roleString
+            ];
+        }
+        $userHasAtLeastOneRole = false;
+        $user = $request->user();
+
+        if ($user) {
+            foreach ($roles as $roleName) {
+                if ($user->hasRole($roleName)) {
+                    $userHasAtLeastOneRole = true;
+                }
+            }
+        }
+        
+        if (!$userHasAtLeastOneRole) {
             return response()->json(["message" => "access_denied"], 403);
         }
 

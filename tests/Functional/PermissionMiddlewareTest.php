@@ -102,6 +102,40 @@ class PermissionMiddlewareTest extends ObjectivityUsersTestCase
         )->getStatusCode());
     }
 
+    public function testUserHasRoleMiddlewareMultipleRoles()
+    {
+        $request = new Request;
+        $roles = new UserRoleCollection;
+        $roles->add($this->userService->getRoles()->getRoleByName('registered-user'));
+        $roles->add($this->userService->getRoles()->getRoleByName('moderator'));
+        $user = $this->generateTestUser(['roles' => $roles]);
+        $user = $this->userService->save($user);
+
+        
+        $request->merge(['user' => $user ]);
+        $request->setUserResolver(function () use ($user) {
+            return $user;
+        });
+        $middleware = new UserHasRoleMiddleware(
+            $this->app->get(Auth::class)
+        );
+        $this->assertEquals(200, $middleware->handle(
+            $request,
+            function () {
+                return response()->json(["message" => "OK"], 200);
+            },
+            "registered-user,moderator"
+        )->getStatusCode());
+
+        $this->assertEquals(403, $middleware->handle(
+            $request,
+            function () {
+                return response()->json(["message" => "OK"], 200);
+            },
+            "admin"
+        )->getStatusCode());
+    }
+
     public function testUserIsNotBannedMiddleware()
     {
         $request = new Request;
