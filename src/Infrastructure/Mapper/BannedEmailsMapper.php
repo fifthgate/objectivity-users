@@ -11,6 +11,7 @@ use Fifthgate\Objectivity\Users\Domain\Collection\BannedEmailsCollection;
 use Fifthgate\Objectivity\Repositories\Infrastructure\Mapper\AbstractDomainEntityMapper;
 use Fifthgate\Objectivity\Core\Domain\Collection\Interfaces\DomainEntityCollectionInterface;
 use Fifthgate\Objectivity\Core\Domain\Interfaces\DomainEntityInterface;
+use \Exception;
 
 class BannedEmailsMapper extends AbstractDomainEntityMapper implements BannedEmailsMapperInterface
 {
@@ -45,13 +46,13 @@ class BannedEmailsMapper extends AbstractDomainEntityMapper implements BannedEma
      * @codeCoverageIgnore
      *
      * At time of writing, this cannot be called by the main system.
-     * 
+     *
      * @param  DomainEntityInterface $domainEntity The Banned Email entity
      * @return DomainEntityInterface The Banned Email Entity
      */
     protected function update(DomainEntityInterface $domainEntity) : DomainEntityInterface
     {
-        die("You can't update a banned e-mail");
+        throw new Exception("You can't update a banned e-mail");
     }
 
     protected function create(DomainEntityInterface $domainEntity) : DomainEntityInterface

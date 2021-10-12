@@ -197,6 +197,9 @@ class UserServiceTest extends ObjectivityUsersTestCase
     {
         $bannedEmail = "nogoodnik@shadyrussianbotfactory.com";
         $bannedReason = "Is a nogoodnik from a shady Russian bot factory";
+
+        $this->userService->save($this->generateTestUser(["email" => $bannedEmail]));
+
         $this->assertNull($this->userService->getBanReason($bannedEmail));
         $this->userService->banEmail($bannedEmail, $bannedReason);
         $this->assertTrue($this->userService->emailIsBanned($bannedEmail));
@@ -207,6 +210,8 @@ class UserServiceTest extends ObjectivityUsersTestCase
             }
         }
         $this->assertTrue($hasBanned);
+        $foundUser = $this->userService->retrieveByCredentials(["email" => $bannedEmail]);
+        $this->assertTrue($foundUser->isBanned());
         $this->assertEquals($bannedReason, $this->userService->getBanReason($bannedEmail));
     }
 

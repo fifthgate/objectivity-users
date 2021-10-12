@@ -143,6 +143,11 @@ class UserService extends AbstractRepositoryDrivenDomainEntityManagementService 
 
     public function banEmail(string $emailAddress, string $reason)
     {
+        $user = $this->retrieveByCredentials(["email" => $emailAddress]);
+        if ($user) {
+            $user->setBanned(true);
+            $this->save($user);
+        }
         return $this->repository->banEmail($emailAddress, $reason);
     }
 
