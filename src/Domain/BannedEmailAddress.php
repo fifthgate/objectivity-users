@@ -4,9 +4,9 @@ namespace Fifthgate\Objectivity\Users\Domain;
 
 use Fifthgate\Objectivity\Users\Domain\Interfaces\BannedEmailInterface;
 use \DateTimeInterface;
-use Fifthgate\Objectivity\Core\Domain\AbstractDomainEntity;
+use Fifthgate\Objectivity\Core\Domain\AbstractSerializableDomainEntity;
 
-class BannedEmailAddress extends AbstractDomainEntity implements BannedEmailInterface
+class BannedEmailAddress extends AbstractSerializableDomainEntity implements BannedEmailInterface
 {
 
     protected string $bannedEmailAddress;
