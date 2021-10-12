@@ -5,9 +5,12 @@ namespace Fifthgate\Objectivity\Users\Domain\Collection;
 use Fifthgate\Objectivity\Core\Domain\Collection\AbstractDomainEntityCollection;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionInterface;
 use Fifthgate\Objectivity\Users\Domain\ValueObjects\Interfaces\UserRoleInterface;
+use Fifthgate\Objectivity\Core\Domain\Collection\Traits\JsonSerializesCollection;
 
 class UserRoleCollection extends AbstractDomainEntityCollection implements UserRoleCollectionInterface
 {
+    use JsonSerializesCollection;
+    
     private $permissionsCache = [];
 
     public function getRoleByName(string $roleName) : ? UserRoleInterface
