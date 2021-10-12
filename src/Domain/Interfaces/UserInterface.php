@@ -58,4 +58,8 @@ interface UserInterface extends Authenticatable, DomainEntityInterface
     public function getAPIToken() : ? string;
 
     public function setAPIToken(string $apiToken);
+
+    public function setBanned(bool $banned);
+
+    public function isBanned() : bool;
 }

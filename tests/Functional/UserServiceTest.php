@@ -152,6 +152,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $user->setAPIToken('LoremIpsum');
         $optOutToken = $this->userService->generateOptOutToken();
         $user->setOptOutToken($optOutToken);
+        $user->setBanned(true);
         $user = $this->userService->save($user);
         $foundUser = $this->userService->find($user->getID());
 
@@ -164,6 +165,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $this->assertEquals($testName, $foundUser->getName());
         $this->assertFalse($foundUser->getCookieAcceptanceStatus());
         $this->assertTrue($foundUser->getIsActivated());
+        $this->assertTrue($foundUser->isBanned());
     }
 
     public function testLackOfOptOutToken()

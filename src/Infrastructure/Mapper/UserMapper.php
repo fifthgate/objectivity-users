@@ -95,6 +95,7 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
         $user->setCookieAcceptanceStatus((bool) $result['has_cookie_consent']);
         $user->setCreatedAt(new Carbon($result['created_at']));
         $user->setUpdatedAt(new Carbon($result['updated_at']));
+        $user->setBanned((bool) $result['banned']);
         if ($result['opt_out_token']) {
             $user->setOptOutToken($result['opt_out_token']);
         }
@@ -149,7 +150,8 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
                 'has_cookie_consent' => $domainEntity->getCookieAcceptanceStatus() ? 1 : 0,
                 'opt_out_token' => $domainEntity->getOptOutToken(),
                 'email_opt_in' => (int) $domainEntity->getEmailOptIn(),
-                'api_token' => $domainEntity->getAPIToken()
+                'api_token' => $domainEntity->getAPIToken(),
+                'banned' => $domainEntity->isBanned()
             ]);
         $this->insertRolesForUser($domainEntity);
         return $domainEntity;
@@ -171,7 +173,8 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
                 'has_cookie_consent' => $domainEntity->getCookieAcceptanceStatus() ? 1 : 0,
                 'opt_out_token' => $domainEntity->getOptOutToken(),
                 'email_opt_in' => (int) $domainEntity->getEmailOptIn(),
-                'api_token' => $domainEntity->getAPIToken()
+                'api_token' => $domainEntity->getAPIToken(),
+                'banned' => $domainEntity->isBanned()
         ]);
         $domainEntity->setID($id);
         $this->insertRolesForUser($domainEntity);

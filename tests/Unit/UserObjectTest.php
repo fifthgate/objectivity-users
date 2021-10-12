@@ -67,6 +67,9 @@ class UserObjectTest extends ObjectivityUsersTestCase
         $this->assertEquals($user->password, $user->getPassword());
         $this->assertNull($user->roles);
         $this->assertEquals($user->getEmailForPasswordReset(), $user->getEmailAddress());
+
+        $user->setBanned(true);
+        $this->assertTrue($user->isBanned());
     }
 
     public function testAllPermissions()

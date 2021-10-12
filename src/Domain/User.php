@@ -32,6 +32,8 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
 
     protected bool $emailOptIn = false;
 
+    protected bool $banned = false;
+
     /**
      * Get the name of the unique identifier for the user.
      *
@@ -228,5 +230,16 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         }
         
         return parent::jsonSerialize($excludedMethods);
+    }
+
+
+    public function setBanned(bool $banned)
+    {
+        $this->banned = $banned;
+    }
+
+    public function isBanned() : bool
+    {
+        return $this->banned;
     }
 }
