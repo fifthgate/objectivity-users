@@ -107,7 +107,7 @@ class PermissionMiddlewareTest extends ObjectivityUsersTestCase
         $request = new Request;
         $roles = new UserRoleCollection;
         $roles->add($this->userService->getRoles()->getRoleByName('registered-user'));
-        $roles->add($this->userService->getRoles()->getRoleByName('moderator'));
+        //$roles->add($this->userService->getRoles()->getRoleByName('admin'));
         $user = $this->generateTestUser(['roles' => $roles]);
         $user = $this->userService->save($user);
 
@@ -124,7 +124,7 @@ class PermissionMiddlewareTest extends ObjectivityUsersTestCase
             function () {
                 return response()->json(["message" => "OK"], 200);
             },
-            "registered-user,moderator"
+            "registered-user"
         )->getStatusCode());
 
         $this->assertEquals(403, $middleware->handle(
