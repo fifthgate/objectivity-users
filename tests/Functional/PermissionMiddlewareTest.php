@@ -124,7 +124,7 @@ class PermissionMiddlewareTest extends ObjectivityUsersTestCase
             function () {
                 return response()->json(["message" => "OK"], 200);
             },
-            "registered-user"
+            "registered-user,somemadeupthing"
         )->getStatusCode());
 
         $this->assertEquals(403, $middleware->handle(
