@@ -22,10 +22,11 @@
     },
     "require": {
         "guzzlehttp/guzzle": "^7.2",
-        "fifthgate/objectivity-repos": "^v0.2.6"
+        "fifthgate/objectivity-repos": "~v1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.3.3"
+        "phpunit/phpunit": "^9.3.3",
+        "orchestra/testbench": "6.x-dev"
     },
     "repositories": [
         {
@@ -37,7 +38,7 @@
             "url": "https://github.com/fifthgate/objectivity-repos"
         }
     ],
-     "extra": {
+    "extra": {
         "laravel": {
             "providers": [
                 "Fifthgate\\Objectivity\\Users\\UserServiceProvider"
