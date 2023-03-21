@@ -17,7 +17,7 @@ use Fifthgate\Objectivity\Users\Tests\ObjectivityUsersTestCase;
 
 class UserObjectTest extends ObjectivityUsersTestCase
 {
-    public function testUser()
+    public function testUser(): void
     {
         $roles = new UserRoleCollection;
         $role = $this->userService->getRoles()->getRoleByName("registered-user");

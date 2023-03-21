@@ -12,15 +12,15 @@ use Illuminate\Notifications\Notifiable;
 class User extends AbstractSerializableDomainEntity implements UserInterface
 {
 
-    protected $password;
+    protected string $password;
 
-    protected $rememberToken;
+    protected ?string $rememberToken = null;
 
-    protected $name;
+    protected string $name;
 
-    protected $roles;
+    protected ? UserRoleCollectionInterface $roles = null;
 
-    protected $emailAddress;
+    protected string $emailAddress;
 
     protected string $apiToken;
 
@@ -39,7 +39,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
      *
      * @return string
      */
-    public function getAuthIdentifierName()
+    public function getAuthIdentifierName(): string
     {
         return 'id';
     }
@@ -49,12 +49,12 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
      *
      * @return mixed
      */
-    public function getAuthIdentifier()
+    public function getAuthIdentifier(): int
     {
         return $this->getID();
     }
 
-    public function setPassword(string $password)
+    public function setPassword(string $password): void
     {
         $this->password = $password;
     }
@@ -64,7 +64,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         return $this->password;
     }
 
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -74,7 +74,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         return $this->name;
     }
 
-    public function setEmailAddress(string $emailAddress)
+    public function setEmailAddress(string $emailAddress): void
     {
         $this->emailAddress = $emailAddress;
     }
@@ -90,7 +90,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
      *
      * @return string
      */
-    public function getRememberToken()
+    public function getRememberToken(): ? string
     {
         return $this->rememberToken;
     }
@@ -101,7 +101,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
      * @param  string  $value
      * @return void
      */
-    public function setRememberToken($value)
+    public function setRememberToken($value): void
     {
         $this->rememberToken = $value;
     }
@@ -111,7 +111,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
      *
      * @return string
      */
-    public function getRememberTokenName()
+    public function getRememberTokenName(): string
     {
         return 'remember_token';
     }
@@ -121,20 +121,20 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
      *
      * @return string
      */
-    public function getAuthPassword()
+    public function getAuthPassword(): string
     {
         return $this->getPassword();
     }
 
     public function hasRole(string $roleName) : bool
     {
-        if ($this->roles) {
-            return $this->roles->getRoleByName($roleName) != null;
+        if (isset($this->roles)) {
+            return $this->roles->getRoleByName($roleName) !== null;
         }
         return false;
     }
 
-    public function setRoles(UserRoleCollectionInterface $roles)
+    public function setRoles(UserRoleCollectionInterface $roles): void
     {
         $this->roles = $roles;
     }
@@ -157,7 +157,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         return false;
     }
 
-    public function setIsActivated(bool $isActivated)
+    public function setIsActivated(bool $isActivated): void
     {
         $this->isActivated = $isActivated;
     }
@@ -167,7 +167,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         return $this->isActivated;
     }
 
-    public function setCookieAcceptanceStatus(bool $cookieAcceptanceStatus)
+    public function setCookieAcceptanceStatus(bool $cookieAcceptanceStatus): void
     {
         $this->cookieAcceptanceStatus = $cookieAcceptanceStatus;
     }
@@ -177,7 +177,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         return $this->cookieAcceptanceStatus;
     }
 
-    public function setOptOutToken(string $optOutToken)
+    public function setOptOutToken(string $optOutToken): void
     {
         $this->optOutToken = $optOutToken;
     }
@@ -192,7 +192,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         return $this->emailOptIn;
     }
 
-    public function setEmailOptIn(bool $emailOptIn)
+    public function setEmailOptIn(bool $emailOptIn): void
     {
         $this->emailOptIn = $emailOptIn;
     }
@@ -213,7 +213,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
      *
      * @return array An array of object variables, based on get methods.
      */
-    public function jsonSerialize($excludedMethods = [])
+    public function jsonSerialize($excludedMethods = []): array
     {
         //This would only get the cryptographic hash of the password, but we're still better not to expose it, even over a secured connection.
         $securityExcludedMethods = [
@@ -233,7 +233,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
     }
 
 
-    public function setBanned(bool $banned)
+    public function setBanned(bool $banned): void
     {
         $this->banned = $banned;
     }
