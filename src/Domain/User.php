@@ -34,6 +34,22 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
 
     protected bool $banned = false;
 
+    public function __construct(
+        string $emailAddress,
+        string $name,
+        bool $isActivated,
+        bool $cookieAcceptanceStatus,
+        bool $emailOptIn,
+        bool $banned
+    ) {
+        $this->emailAddress = $emailAddress;
+        $this->name = $name;
+        $this->isActivated = $isActivated;
+        $this->cookieAcceptanceStatus = $cookieAcceptanceStatus;
+        $this->emailOptIn = $emailOptIn;
+        $this->banned = $banned;
+    }
+
     /**
      * Get the name of the unique identifier for the user.
      *
@@ -54,31 +70,52 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         return $this->getID();
     }
 
+    /**
+     * @param string $password
+     * @return void
+     */
     public function setPassword(string $password): void
     {
         $this->password = $password;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPassword() : ? string
     {
         return $this->password;
     }
 
+    /**
+     * @param string $name
+     * @return void
+     */
     public function setName(string $name): void
     {
         $this->name = $name;
     }
 
+    /**
+     * @return string
+     */
     public function getName() : string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $emailAddress
+     * @return void
+     */
     public function setEmailAddress(string $emailAddress): void
     {
         $this->emailAddress = $emailAddress;
     }
 
+    /**
+     * @return string
+     */
     public function getEmailAddress() : string
     {
         return $this->emailAddress;
