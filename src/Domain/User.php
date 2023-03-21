@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends AbstractSerializableDomainEntity implements UserInterface
 {
 
-    protected string $password;
+    protected string $password = '';
 
     protected ?string $rememberToken = null;
 

@@ -25,7 +25,15 @@ class UserObjectTest extends ObjectivityUsersTestCase
         $roles->add($role);
         $hashedPassword = Hash::make("LoremIpsum");
         $createdAt = new DateTime;
-        $user = new LaravelUser;
+        $user = new LaravelUser(
+            "lipsum@lipsum.com",
+            "Laura Ipsum",
+            false,
+            false,
+            false,
+            false
+
+        );
         $user->setID(1);
         $user->setPassword($hashedPassword);
         $user->setRememberToken("rememberToken");
@@ -85,7 +93,14 @@ class UserObjectTest extends ObjectivityUsersTestCase
         $roles->add($role);
         $hashedPassword = Hash::make("LoremIpsum");
         $createdAt = new DateTime;
-        $user = new LaravelUser;
+        $user = new LaravelUser(
+            "lipsum@lipsum.com",
+            "Laura Ipsum",
+            true,
+            false,
+            false,
+            false,
+        );
         $user->setID(1);
         $user->setPassword($hashedPassword);
         $user->setRememberToken("rememberToken");

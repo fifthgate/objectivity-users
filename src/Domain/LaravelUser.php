@@ -55,7 +55,15 @@ class LaravelUser extends User implements LaravelUserInterface, MakesLaravelUser
 
     public static function makeFromUser(UserInterface $user) : LaravelUserInterface
     {
-        $laravelUser = new self;
+        $laravelUser = new self(
+            $user->getEmailAddress(),
+            $user->getName(),
+            $user->getIsActivated(),
+            $user->getCookieAcceptanceStatus(),
+            $user->getEmailOptIn(),
+            $user->isBanned()
+
+        );
         if ($user->getID()) {
             $laravelUser->setID($user->getID());
         }

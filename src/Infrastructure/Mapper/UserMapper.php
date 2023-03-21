@@ -57,7 +57,7 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
     {
         $query = $this->db->table($this->getTableName());
         foreach ($credentials as $credentialName => $credentialPayload) {
-            if ($credentialName == 'password' || $credentialName == 'password_confirmation') {
+            if ($credentialName === 'password' || $credentialName === 'password_confirmation') {
                 continue;
             }
             
@@ -83,23 +83,27 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
 
     public static function staticMap(array $result) : DomainEntityInterface
     {
-        $user = new User;
+        $user = new User(
+            $result['email'],
+            $result['name'],
+            (bool) $result['is_activated'],
+            (bool) $result['has_cookie_consent'],
+            (bool) $result['email_opt_in'],
+            (bool) $result['banned']
+        );
         if ($result['id']) {
             $user->setID($result['id']);
         }
-        $user->setName($result['name']);
+
         $user->setPassword($result['password']);
-        $user->setEmailAddress($result['email']);
-        $user->setIsActivated((bool) $result['is_activated']);
         $user->setRememberToken($result['remember_token']);
-        $user->setCookieAcceptanceStatus((bool) $result['has_cookie_consent']);
+
         $user->setCreatedAt(new Carbon($result['created_at']));
         $user->setUpdatedAt(new Carbon($result['updated_at']));
-        $user->setBanned((bool) $result['banned']);
+
         if ($result['opt_out_token']) {
             $user->setOptOutToken($result['opt_out_token']);
         }
-        $user->setEmailOptIn((bool) $result['email_opt_in']);
         $user->setAPIToken($result['api_token'] ?? '');
         return $user;
     }

@@ -140,13 +140,17 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $testEmailAddress = "probity@inaction.gov";
         $createdAt = new DateTime;
         $testRoles = $this->userService->getRoles()->filterByMachineNames(["registered-user"]);
-        $user = new User;
+        $user = new User(
+            $testEmailAddress,
+            $testName,
+            true,
+            false,
+            false,
+            false
+        );
+
         $user->setPassword($testPassword);
-        $user->setName($testName);
-        $user->setEmailAddress($testEmailAddress);
         $user->setRoles($testRoles);
-        $user->setIsActivated(true);
-        $user->setCookieAcceptanceStatus(false);
         $user->setCreatedAt($createdAt);
         $user->setUpdatedAt($createdAt);
         $user->setAPIToken('LoremIpsum');
@@ -175,7 +179,14 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $testEmailAddress = "probity@inaction.gov";
         $createdAt = new DateTime;
         $testRoles = $this->userService->getRoles()->filterByMachineNames(["registered-user"]);
-        $user = new User;
+        $user = new User(
+            $testEmailAddress,
+            $testName,
+            true,
+            false,
+            false,
+            false,
+        );
         $user->setPassword($testPassword);
         $user->setName($testName);
         $user->setEmailAddress($testEmailAddress);
@@ -222,7 +233,14 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $testEmailAddress = "probity@inaction.gov";
         $createdAt = new DateTime;
         $testRoles = $this->userService->getRoles()->filterByMachineNames(["registered-user"]);
-        $user = new User;
+        $user = new User(
+            $testEmailAddress,
+            $testName,
+            true,
+            false,
+            false,
+            false,
+        );
         $user->setPassword($testPassword);
         $user->setName($testName);
         $user->setEmailAddress($testEmailAddress);

@@ -12,7 +12,14 @@ class TestUserEmailOptin extends ObjectivityUsersTestCase
 {
     public function testUserOptinIntegrity()
     {
-        $user = new User;
+        $user = new User(
+            'test@test.com',
+            'TEst User',
+            true,
+            false,
+            false,
+            false,
+        );
         $this->assertFalse($user->getEmailOptIn());
         $user->setEmailOptIn(true);
         $this->assertTrue($user->getEmailOptIn());

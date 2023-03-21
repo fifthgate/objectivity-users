@@ -14,15 +14,22 @@ abstract class ObjectivityUsersTestCase extends TestCase {
 
 	protected function generateTestUser(array $overrides = [])
     {
-        $user = new User;
+        $user = new User(
+            $overrides["email"] ?? 'lipsum@lauraipsum.com',
+            $overrides['name'] ?? 'Laura Ipsum',
+                $overrides["is_activated"] ?? false,
+                $overrides["cookie_acceptance_status"] ?? false,
+            $overrides['email_opt_in'] ?? false,
+                $overrides['banned'] ?? false,
+
+        );
         $user->setPassword(Hash::make($overrides["password"] ?? 'LoremIpsum'));
-        $user->setName($overrides["name"] ?? 'Laura Ipsum');
-        $user->setEmailAddress($overrides["email"] ?? 'lipsum@lauraipsum.com');
+
         $user->setCreatedAt($overrides["createdAt"] ?? new DateTime);
         $user->setUpdatedAt($overrides["updatedAt"] ?? new DateTime);
         $user->setRoles($overrides["roles"] ?? $this->userService->getRoles());
-        $user->setIsActivated($overrides["is_activated"] ?? false);
-        $user->setCookieAcceptanceStatus($overrides["cookie_acceptance_status"] ?? false);
+
+
         $user->setAPIToken($overrides["api_token"] ?? Str::random(60));
         return $user;
     }
