@@ -7,5 +7,5 @@ use Fifthgate\Objectivity\Users\Domain\Interfaces\UserInterface;
 
 interface MakesLaravelUserFromUser
 {
-    public static function makeFromUser(UserInterface $user) : LaravelUserInterface;
+    public static function makeFromUser(UserInterface $user): LaravelUserInterface;
 }

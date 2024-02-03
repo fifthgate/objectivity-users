@@ -33,17 +33,17 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
         $this->roles = $roles;
     }
 
-    public function makeCollection() : DomainEntityCollectionInterface
+    public function makeCollection(): DomainEntityCollectionInterface
     {
-        return new UserCollection;
+        return new UserCollection();
     }
 
     /**
      * @codeCoverageIgnore
      */
-    public static function staticMapMany(array $results) : DomainEntityCollectionInterface
+    public static function staticMapMany(array $results): DomainEntityCollectionInterface
     {
-        $collection = new UserCollection;
+        $collection = new UserCollection();
         foreach ($results as $result) {
             $collection->add(self::staticMap((array) $result));
         }
@@ -53,23 +53,23 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
     /**
      * @codeCoverageIgnore
      */
-    public function retrieveByCredentials(array $credentials) : ? UserInterface
+    public function retrieveByCredentials(array $credentials): ?UserInterface
     {
         $query = $this->db->table($this->getTableName());
         foreach ($credentials as $credentialName => $credentialPayload) {
             if ($credentialName === 'password' || $credentialName === 'password_confirmation') {
                 continue;
             }
-            
+
             $query = $query->where($credentialName, '=', $credentialPayload);
         }
-        
+
         $result = $query->first();
-        
+
         return $result ? $this->mapEntity((array) $result) : null;
     }
 
-    public function mapEntity(array $result) : DomainEntityInterface
+    public function mapEntity(array $result): DomainEntityInterface
     {
         $user = self::staticMap($result)       ;
         $roles = $this->getRolesForUserID($user->getID());
@@ -81,7 +81,7 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
     }
 
 
-    public static function staticMap(array $result) : DomainEntityInterface
+    public static function staticMap(array $result): DomainEntityInterface
     {
         $user = new User(
             $result['email'],
@@ -108,7 +108,7 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
         return $user;
     }
 
-    public function getRolesForUserID(int $userID) : ? UserRoleCollectionInterface
+    public function getRolesForUserID(int $userID): ?UserRoleCollectionInterface
     {
         $results = $this->db->table('user_roles')->select('role_name')
             ->where('user_id', '=', $userID)
@@ -119,7 +119,7 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
 
     private function mapRoles(array $roleNames)
     {
-        $collection = new UserRoleCollection;
+        $collection = new UserRoleCollection();
         $hasRoles = false;
         foreach ($roleNames as $roleName) {
             $role = $this->roles->getRoleByName($roleName->role_name);
@@ -137,10 +137,10 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
         parent::delete($user);
     }
 
-    protected function update(DomainEntityInterface $domainEntity) : DomainEntityInterface
+    protected function update(DomainEntityInterface $domainEntity): DomainEntityInterface
     {
         $this->purgeRolesForUser($domainEntity);
-        $updatedAt = new Carbon;
+        $updatedAt = new Carbon();
         $this->db->table($this->getTableName())
             ->where('id', $domainEntity->getID())
             ->update([
@@ -161,10 +161,10 @@ class UserMapper extends AbstractDomainEntityMapper implements UserMapperInterfa
         return $domainEntity;
     }
 
-    protected function create(DomainEntityInterface $domainEntity) : DomainEntityInterface
+    protected function create(DomainEntityInterface $domainEntity): DomainEntityInterface
     {
         $this->purgeRolesForUser($domainEntity);
-        $updatedAt = new Carbon;
+        $updatedAt = new Carbon();
         $id = $this->db->table($this->getTableName())
             ->insertGetId([
                 'name' => $domainEntity->getName(),

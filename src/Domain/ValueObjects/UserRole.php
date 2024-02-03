@@ -27,16 +27,16 @@ class UserRole extends AbstractDomainEntity implements UserRoleInterface
         $this->permissions = $permissions;
     }
 
-    public function getID() : int
+    public function getID(): int
     {
         return 0;
     }
-    public function getMachineName() : string
+    public function getMachineName(): string
     {
         return $this->machineName;
     }
 
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -46,12 +46,12 @@ class UserRole extends AbstractDomainEntity implements UserRoleInterface
         return $this->description;
     }
 
-    public function getPermissions() : array
+    public function getPermissions(): array
     {
         return $this->permissions;
     }
 
-    public function hasPermission(string $permissionName) : bool
+    public function hasPermission(string $permissionName): bool
     {
         foreach ($this->permissions as $permission) {
             if ($permission == '*') {

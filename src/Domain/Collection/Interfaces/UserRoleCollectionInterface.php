@@ -8,9 +8,9 @@ use JsonSerializable;
 
 interface UserRoleCollectionInterface extends DomainEntityCollectionInterface, JsonSerializable
 {
-    public function getRoleByName(string $roleName) : ? UserRoleInterface;
+    public function getRoleByName(string $roleName): ?UserRoleInterface;
 
-    public function getAllPermissions() : array;
+    public function getAllPermissions(): array;
 
-    public function filterByMachineNames(array $machineNames) : ? UserRoleCollectionInterface;
+    public function filterByMachineNames(array $machineNames): ?UserRoleCollectionInterface;
 }

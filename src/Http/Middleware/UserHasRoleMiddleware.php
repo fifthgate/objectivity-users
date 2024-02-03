@@ -1,23 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fifthgate\Objectivity\Users\Http\Middleware;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Closure;
-use Response;
-use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Http\Request;
+
 
 class UserHasRoleMiddleware extends Middleware
 {
-  
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return string|null
      */
     //@codeCoverageIgnoreStart
-    protected function redirectTo($request)
+    protected function redirectTo(Request $request): ?string
     {
         if (! $request->expectsJson()) {
             return route('login');
@@ -28,17 +30,17 @@ class UserHasRoleMiddleware extends Middleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  \Closure  $next
      * @param  string[]  ...$guards
      * @return mixed
      *
-     * @throws \Illuminate\Auth\AuthenticationException
+     * @throws AuthenticationException
      */
     public function handle($request, Closure $next, ...$guards)
     {
         $roleString = reset($guards);
-        
+
         if (strpos($roleString, ",") !== false) {
             $roles = explode(",", $roleString);
         } else {
@@ -56,7 +58,7 @@ class UserHasRoleMiddleware extends Middleware
                 }
             }
         }
-        
+
         if (!$userHasAtLeastOneRole) {
             return response()->json(["message" => "access_denied"], 403);
         }

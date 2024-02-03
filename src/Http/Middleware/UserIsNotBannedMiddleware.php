@@ -11,7 +11,7 @@ use Fifthgate\Objectivity\Users\Service\Interfaces\UserServiceInterface;
 class UserIsNotBannedMiddleware extends Middleware
 {
     protected UserServiceInterface $userService;
- 
+
     public function __construct(UserServiceInterface $userService)
     {
         $this->userService = $userService;
@@ -46,7 +46,7 @@ class UserIsNotBannedMiddleware extends Middleware
     {
         $user = $request->user();
         $banned = $this->userService->emailIsBanned($user->getEmailAddress());
-        
+
         if ($banned) {
             $banReason = $this->userService->getBanReason($user->getEmailAddress());
             return response()->json(["message" => "Forbidden. Your user account has been banned due to {$banReason}."], 403);

@@ -8,5 +8,5 @@ use Fifthgate\Objectivity\Core\Domain\Collection\Traits\JsonSerializesCollection
 
 class BannedEmailsCollection extends AbstractDomainEntityCollection implements BannedEmailCollectionInterface
 {
-	use JsonSerializesCollection;
+    use JsonSerializesCollection;
 }

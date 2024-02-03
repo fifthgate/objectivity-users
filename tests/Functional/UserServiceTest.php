@@ -7,9 +7,9 @@ use Illuminate\Foundation\Testing\WithFaker;
 
 use Fifthgate\Objectivity\Users\Service\Interfaces\UserServiceInterface;
 use Fifthgate\Objectivity\Users\Domain\User;
-use \DateTime;
+use DateTime;
 use Illuminate\Support\Facades\Hash;
-use \DateTimeInterface;
+use DateTimeInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserCollectionInterface;
 use Fifthgate\Objectivity\Users\Domain\Interfaces\UserInterface;
 use Fifthgate\Objectivity\Users\Tests\ObjectivityUsersTestCase;
@@ -71,7 +71,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
 
     public function testRetrieveByCredentials()
     {
-        $testStart = new DateTime;
+        $testStart = new DateTime();
         $user = $this->generateTestUser();
         $user = $this->userService->save($user);
         $id = $user->getID();
@@ -79,12 +79,12 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $this->assertInstanceOf(UserInterface::class, $user);
         $this->assertEquals($user->getID(), $id);
 
-        $this->assertNull($this->userService->retrieveByCredentials(['password'=>'something']));
+        $this->assertNull($this->userService->retrieveByCredentials(['password' => 'something']));
     }
 
     public function testUpdateRememberToken()
     {
-        $testStart = new DateTime;
+        $testStart = new DateTime();
         $user = $this->generateTestUser();
         $user = $this->userService->save($user);
         $this->userService->updateRememberToken($user, 'rememberToken');
@@ -94,7 +94,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
 
     public function testRetrieveByToken()
     {
-        $testStart = new DateTime;
+        $testStart = new DateTime();
         $user = $this->generateTestUser();
         $user = $this->userService->save($user);
         $id = $user->getID();
@@ -105,15 +105,15 @@ class UserServiceTest extends ObjectivityUsersTestCase
 
     public function testValidateCredentials()
     {
-        $testStart = new DateTime;
+        $testStart = new DateTime();
         $user = $this->generateTestUser();
         $user = $this->userService->save($user);
-        $this->assertTrue($this->userService->validateCredentials($user, ['password'=>'LoremIpsum']));
+        $this->assertTrue($this->userService->validateCredentials($user, ['password' => 'LoremIpsum']));
     }
 
     public function testFindAll()
     {
-        $testStart = new DateTime;
+        $testStart = new DateTime();
         $user = $this->generateTestUser();
         $user = $this->userService->save($user);
         $users = $this->userService->findAll();
@@ -126,7 +126,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
 
     public function testDelete()
     {
-        $testStart = new DateTime;
+        $testStart = new DateTime();
         $user = $this->generateTestUser();
         $user = $this->userService->save($user);
         $this->userService->delete($user);
@@ -138,7 +138,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $testPassword = "Test";
         $testName = "Test Name";
         $testEmailAddress = "probity@inaction.gov";
-        $createdAt = new DateTime;
+        $createdAt = new DateTime();
         $testRoles = $this->userService->getRoles()->filterByMachineNames(["registered-user"]);
         $user = new User(
             $testEmailAddress,
@@ -177,7 +177,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $testPassword = "Test";
         $testName = "Test Name";
         $testEmailAddress = "probity@inaction.gov";
-        $createdAt = new DateTime;
+        $createdAt = new DateTime();
         $testRoles = $this->userService->getRoles()->filterByMachineNames(["registered-user"]);
         $user = new User(
             $testEmailAddress,
@@ -196,10 +196,10 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $user->setCreatedAt($createdAt);
         $user->setUpdatedAt($createdAt);
         $user->setAPIToken('LoremIpsum');
-        
+
         $user = $this->userService->save($user);
         $foundUser = $this->userService->find($user->getID());
-        
+
         $this->assertNotNull($foundUser->getOptOutToken());
     }
 
@@ -231,7 +231,7 @@ class UserServiceTest extends ObjectivityUsersTestCase
         $testPassword = "Test";
         $testName = "Test Name";
         $testEmailAddress = "probity@inaction.gov";
-        $createdAt = new DateTime;
+        $createdAt = new DateTime();
         $testRoles = $this->userService->getRoles()->filterByMachineNames(["registered-user"]);
         $user = new User(
             $testEmailAddress,

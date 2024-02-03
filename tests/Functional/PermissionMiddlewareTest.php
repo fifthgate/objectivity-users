@@ -14,7 +14,7 @@ class PermissionMiddlewareTest extends ObjectivityUsersTestCase
 {
     public function testNotLoggedIn()
     {
-        $request = new Request;
+        $request = new Request();
 
         $middleware = new UserHasPermissionMiddleware($this->app->get(Auth::class));
         $this->assertEquals(403, $middleware->handle($request, function () {
@@ -23,10 +23,10 @@ class PermissionMiddlewareTest extends ObjectivityUsersTestCase
 
     public function testLoggedInWithDefaultPermissions()
     {
-        $request = new Request;
+        $request = new Request();
         $user = $this->generateTestUser();
         $user = $this->userService->save($user);
-        $request->merge(['user' => $user ]);
+        $request->merge(['user' => $user->jsonSerialize() ]);
         $request->setUserResolver(function () use ($user) {
             return $user;
         });
@@ -45,14 +45,14 @@ class PermissionMiddlewareTest extends ObjectivityUsersTestCase
 
     public function testLoggedInWithInsufficientPermissions()
     {
-        $request = new Request;
-        $roles = new UserRoleCollection;
+        $request = new Request();
+        $roles = new UserRoleCollection();
         $roles->add($this->userService->getRoles()->getRoleByName('registered-user'));
         $user = $this->generateTestUser(['roles' => $roles]);
         $user = $this->userService->save($user);
 
-        
-        $request->merge(['user' => $user ]);
+
+        $request->merge(['user' => $user->jsonSerialize() ]);
         $request->setUserResolver(function () use ($user) {
             return $user;
         });
@@ -71,14 +71,14 @@ class PermissionMiddlewareTest extends ObjectivityUsersTestCase
 
     public function testUserHasRoleMiddleware()
     {
-        $request = new Request;
-        $roles = new UserRoleCollection;
+        $request = new Request();
+        $roles = new UserRoleCollection();
         $roles->add($this->userService->getRoles()->getRoleByName('registered-user'));
         $user = $this->generateTestUser(['roles' => $roles]);
         $user = $this->userService->save($user);
 
-        
-        $request->merge(['user' => $user ]);
+
+        $request->merge(['user' => $user->jsonSerialize() ]);
         $request->setUserResolver(function () use ($user) {
             return $user;
         });
@@ -104,15 +104,14 @@ class PermissionMiddlewareTest extends ObjectivityUsersTestCase
 
     public function testUserHasRoleMiddlewareMultipleRoles()
     {
-        $request = new Request;
-        $roles = new UserRoleCollection;
+        $request = new Request();
+        $roles = new UserRoleCollection();
         $roles->add($this->userService->getRoles()->getRoleByName('registered-user'));
-        //$roles->add($this->userService->getRoles()->getRoleByName('admin'));
         $user = $this->generateTestUser(['roles' => $roles]);
         $user = $this->userService->save($user);
 
-        
-        $request->merge(['user' => $user ]);
+
+        $request->merge(['user' => $user->jsonSerialize() ]);
         $request->setUserResolver(function () use ($user) {
             return $user;
         });
@@ -138,14 +137,14 @@ class PermissionMiddlewareTest extends ObjectivityUsersTestCase
 
     public function testUserIsNotBannedMiddleware()
     {
-        $request = new Request;
-        $roles = new UserRoleCollection;
+        $request = new Request();
+        $roles = new UserRoleCollection();
         $roles->add($this->userService->getRoles()->getRoleByName('registered-user'));
         $user = $this->generateTestUser(['email' => 'nogood@badboy.com', 'roles' => $roles]);
         $user = $this->userService->save($user);
 
-        
-        $request->merge(['user' => $user ]);
+
+        $request->merge(['user' => $user->jsonSerialize() ]);
         $request->setUserResolver(function () use ($user) {
             return $user;
         });

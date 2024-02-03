@@ -8,5 +8,5 @@ use Fifthgate\Objectivity\Core\Domain\Collection\Traits\JsonSerializesCollection
 
 class UserCollection extends AbstractDomainEntityCollection implements UserCollectionInterface
 {
-	use JsonSerializesCollection;
+    use JsonSerializesCollection;
 }

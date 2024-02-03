@@ -14,23 +14,23 @@ use Fifthgate\Objectivity\Users\Domain\Interfaces\LaravelUserInterface;
 
 interface UserServiceInterface extends UserProvider, DomainEntityManagementServiceInterface
 {
-    public function getRoles() : ? UserRoleCollectionInterface;
+    public function getRoles(): ?UserRoleCollectionInterface;
 
-    public function getHasher() : HasherContract;
+    public function getHasher(): HasherContract;
 
-    public function hashPassword(string $password) : string;
+    public function hashPassword(string $password): string;
 
-    public function generateRandomPassword(int $length) : string;
+    public function generateRandomPassword(int $length): string;
 
     public function banEmail(string $emailAddress, string $reason);
 
-    public function getBannedEmails() : BannedEmailCollectionInterface;
+    public function getBannedEmails(): BannedEmailCollectionInterface;
 
-    public function getBanReason(string $emailAddress) : ? string;
+    public function getBanReason(string $emailAddress): ?string;
 
-    public function emailIsBanned(string $emailAddress) : bool;
+    public function emailIsBanned(string $emailAddress): bool;
 
     public function generateOptOutToken(): string;
 
-    public function generateLaravelCompatibleUser(UserInterface $user) : LaravelUserInterface;
+    public function generateLaravelCompatibleUser(UserInterface $user): LaravelUserInterface;
 }

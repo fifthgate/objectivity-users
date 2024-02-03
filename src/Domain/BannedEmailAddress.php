@@ -3,12 +3,11 @@
 namespace Fifthgate\Objectivity\Users\Domain;
 
 use Fifthgate\Objectivity\Users\Domain\Interfaces\BannedEmailInterface;
-use \DateTimeInterface;
+use DateTimeInterface;
 use Fifthgate\Objectivity\Core\Domain\AbstractSerializableDomainEntity;
 
 class BannedEmailAddress extends AbstractSerializableDomainEntity implements BannedEmailInterface
 {
-
     protected string $bannedEmailAddress;
 
     protected string $banReason;
@@ -25,12 +24,12 @@ class BannedEmailAddress extends AbstractSerializableDomainEntity implements Ban
         }
     }
 
-    public function getBannedEmailAddress() : string
+    public function getBannedEmailAddress(): string
     {
         return $this->bannedEmailAddress;
     }
 
-    public function getBanReason() : string
+    public function getBanReason(): string
     {
         return $this->banReason;
     }

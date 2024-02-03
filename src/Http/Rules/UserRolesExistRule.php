@@ -35,7 +35,7 @@ class UserRolesExistRule implements Rule
             $passes = false;
             $this->errors[] = "Role input supplied to the '{$attribute}' field must be supplied as an array of role names.";
         }
-        
+
         if ($passes) {
             foreach ($value as $candidateRoleName) {
                 $role = $this->userService->getRoles()->getRoleByName($candidateRoleName);
@@ -45,7 +45,7 @@ class UserRolesExistRule implements Rule
                 }
             }
         }
-        
+
         return $passes;
     }
 

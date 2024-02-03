@@ -34,7 +34,7 @@ class UserService extends AbstractRepositoryDrivenDomainEntityManagementService 
         parent::__construct($userRepository);
     }
 
-    public function getEntityInfo() : array
+    public function getEntityInfo(): array
     {
         return [
             'user' => [
@@ -82,7 +82,7 @@ class UserService extends AbstractRepositoryDrivenDomainEntityManagementService 
         $this->save($user);
     }
 
-    public function save(DomainEntityInterface $domainEntity) : DomainEntityInterface
+    public function save(DomainEntityInterface $domainEntity): DomainEntityInterface
     {
         if (!$domainEntity->getOptOutToken()) {
             $domainEntity->setOptOutToken($this->generateOptOutToken());
@@ -121,22 +121,22 @@ class UserService extends AbstractRepositoryDrivenDomainEntityManagementService 
         );
     }
 
-    public function getRoles() : ? UserRoleCollectionInterface
+    public function getRoles(): ?UserRoleCollectionInterface
     {
         return $this->roles;
     }
 
-    public function getHasher() : HasherContract
+    public function getHasher(): HasherContract
     {
         return $this->hasher;
     }
 
-    public function hashPassword(string $password) : string
+    public function hashPassword(string $password): string
     {
         return $this->getHasher()->make($password);
     }
 
-    public function generateRandomPassword(int $length) : string
+    public function generateRandomPassword(int $length): string
     {
         return Str::random($length);
     }
@@ -151,17 +151,17 @@ class UserService extends AbstractRepositoryDrivenDomainEntityManagementService 
         return $this->repository->banEmail($emailAddress, $reason);
     }
 
-    public function getBannedEmails() : BannedEmailCollectionInterface
+    public function getBannedEmails(): BannedEmailCollectionInterface
     {
         return $this->repository->getBannedEmails();
     }
 
-    public function emailIsBanned(string $emailAddress) : bool
+    public function emailIsBanned(string $emailAddress): bool
     {
         return $this->repository->emailIsBanned($emailAddress);
     }
 
-    public function getBanReason(string $emailAddress) : ? string
+    public function getBanReason(string $emailAddress): ?string
     {
         return $this->repository->getBanReason($emailAddress);
     }
@@ -171,7 +171,7 @@ class UserService extends AbstractRepositoryDrivenDomainEntityManagementService 
         return Str::uuid();
     }
 
-    public function generateLaravelCompatibleUser(UserInterface $user) : LaravelUserInterface
+    public function generateLaravelCompatibleUser(UserInterface $user): LaravelUserInterface
     {
         return LaravelUser::makeFromUser($user);
     }

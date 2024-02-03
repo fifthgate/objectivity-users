@@ -9,7 +9,7 @@ use Fifthgate\Objectivity\Users\Domain\LaravelUser;
 
 use Fifthgate\Objectivity\Users\Service\Interfaces\UserServiceInterface;
 use Illuminate\Support\Facades\Hash;
-use \DateTime;
+use DateTime;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\UserRoleCollection;
 use Fifthgate\Objectivity\Users\Domain\ValueObjects\UserRole;
@@ -17,7 +17,7 @@ use Fifthgate\Objectivity\Users\Tests\ObjectivityUsersTestCase;
 
 class UserRoleObjectTest extends ObjectivityUsersTestCase
 {
-	public function testRoleConstruction()
+    public function testRoleConstruction()
     {
         $roleMachineName = "t800";
         $roleName = "Cyberdyne Systems T-800 model 101";

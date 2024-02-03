@@ -13,8 +13,6 @@ use Fifthgate\Objectivity\Users\Domain\BannedEmailAddress;
 
 class UserRepository extends AbstractDomainEntityRepository implements UserRepositoryInterface
 {
-    protected $mapper;
-
     protected $bannedEmailsMapper;
 
     public function __construct(
@@ -25,12 +23,12 @@ class UserRepository extends AbstractDomainEntityRepository implements UserRepos
         $this->bannedEmailsMapper = $bannedEmailsMapper;
     }
 
-    public function retrieveByCredentials(array $credentials) : ? UserInterface
+    public function retrieveByCredentials(array $credentials): ?UserInterface
     {
         return $this->mapper->retrieveByCredentials($credentials);
     }
 
-    public function retrieveByIDAndToken(int $id, string $token) : ? UserInterface
+    public function retrieveByIDAndToken(int $id, string $token): ?UserInterface
     {
         return $this->mapper->queryOne([
             'id' => $id,
@@ -44,12 +42,12 @@ class UserRepository extends AbstractDomainEntityRepository implements UserRepos
         return $this->bannedEmailsMapper->save($bannedEmail);
     }
 
-    public function getBannedEmails() : BannedEmailCollectionInterface
+    public function getBannedEmails(): BannedEmailCollectionInterface
     {
         return $this->bannedEmailsMapper->findAll();
     }
 
-    public function emailIsBanned(string $emailAddress) : bool
+    public function emailIsBanned(string $emailAddress): bool
     {
         $result = $this->bannedEmailsMapper->queryOne([
             'email' => $emailAddress
@@ -57,7 +55,7 @@ class UserRepository extends AbstractDomainEntityRepository implements UserRepos
         return (bool) $result;
     }
 
-    public function getBanReason(string $emailAddress) : ? string
+    public function getBanReason(string $emailAddress): ?string
     {
         $result = $this->bannedEmailsMapper->queryOne([
             'email' => $emailAddress

@@ -8,7 +8,7 @@ use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserCollectionInter
 
 interface UserMapperInterface
 {
-    public function retrieveByCredentials(array $credentials) : ? UserInterface;
+    public function retrieveByCredentials(array $credentials): ?UserInterface;
 
-    public function getRolesForUserID(int $userID) : ? UserRoleCollectionInterface;
+    public function getRolesForUserID(int $userID): ?UserRoleCollectionInterface;
 }

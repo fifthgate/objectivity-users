@@ -23,7 +23,7 @@ class UserRoleCollectionTest extends ObjectivityUsersTestCase
         );
 
         $moderatorRoleMachineName = "tx";
-        $moderatorRoleName ="T-X";
+        $moderatorRoleName = "T-X";
         $moderatorRoleDescription = "A bit like a T-1000, but lamer. A bit like a T-800, but lamer. But it's a go-go gadget lady this time!";
         $moderatorRolePermissions = ["search","terminate","gratuitouslyInflateCleavage"];
 
@@ -45,7 +45,7 @@ class UserRoleCollectionTest extends ObjectivityUsersTestCase
             $adminRolePermissions
         );
 
-        $roles = new UserRoleCollection;
+        $roles = new UserRoleCollection();
         $roles->add($userRole);
         $roles->add($moderatorRole);
         $roles->add($adminRole);

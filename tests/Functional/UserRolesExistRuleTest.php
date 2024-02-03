@@ -22,7 +22,7 @@ class UserRolesExistRuleTest extends ObjectivityUsersTestCase
         ];
         $this->assertTrue($rule->passes('roles', $validInput));
         $rule->passes('roles', $validInput);
-        
+
         $rule = new UserRolesExistRule($this->userService);
         $this->assertFalse($rule->passes('roles', $invalidInput));
         $expectedErrorString = "The role 'nogoodnik' supplied for the 'roles' field does not exist, The role 'malcontent' supplied for the 'roles' field does not exist, The role 'saboteur' supplied for the 'roles' field does not exist";

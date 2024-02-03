@@ -2,7 +2,6 @@
 
 namespace Fifthgate\Objectivity\Users\Tests\Unit;
 
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Fifthgate\Objectivity\Users\Tests\ObjectivityUsersTestCase;

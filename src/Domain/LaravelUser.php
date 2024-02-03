@@ -47,13 +47,13 @@ class LaravelUser extends User implements LaravelUserInterface, MakesLaravelUser
             case 'password':
                 return $this->getPassword();
                 break;
-                
+
             default:
                 return null;
         }
     }
 
-    public static function makeFromUser(UserInterface $user) : LaravelUserInterface
+    public static function makeFromUser(UserInterface $user): LaravelUserInterface
     {
         $laravelUser = new self(
             $user->getEmailAddress(),
@@ -62,7 +62,6 @@ class LaravelUser extends User implements LaravelUserInterface, MakesLaravelUser
             $user->getCookieAcceptanceStatus(),
             $user->getEmailOptIn(),
             $user->isBanned()
-
         );
         if ($user->getID()) {
             $laravelUser->setID($user->getID());

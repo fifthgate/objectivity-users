@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 class BannedEmails extends Migration
 {
-     /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    /**
+    * Run the migrations.
+    *
+    * @return void
+    */
     public function up()
     {
         if (!Schema::hasTable('banned_emails')) {
@@ -19,9 +19,9 @@ class BannedEmails extends Migration
                 $table->string('email')->unique();
                 $table->string('ban_reason');
                 $table->timestamps();
-            });    
+            });
         }
-        
+
     }
 
     /**

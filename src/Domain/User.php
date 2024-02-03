@@ -3,7 +3,7 @@
 namespace Fifthgate\Objectivity\Users\Domain;
 
 use Fifthgate\Objectivity\Users\Domain\Interfaces\UserInterface;
-use \DateTimeInterface;
+use DateTimeInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionInterface;
 use Fifthgate\Objectivity\Core\Domain\AbstractSerializableDomainEntity;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -11,14 +11,13 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends AbstractSerializableDomainEntity implements UserInterface
 {
-
     protected string $password = '';
 
     protected ?string $rememberToken = null;
 
     protected string $name;
 
-    protected ? UserRoleCollectionInterface $roles = null;
+    protected ?UserRoleCollectionInterface $roles = null;
 
     protected string $emailAddress;
 
@@ -82,7 +81,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
     /**
      * @return string|null
      */
-    public function getPassword() : ? string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -99,7 +98,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -116,7 +115,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
     /**
      * @return string
      */
-    public function getEmailAddress() : string
+    public function getEmailAddress(): string
     {
         return $this->emailAddress;
     }
@@ -127,7 +126,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
      *
      * @return string
      */
-    public function getRememberToken(): ? string
+    public function getRememberToken(): ?string
     {
         return $this->rememberToken;
     }
@@ -163,7 +162,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         return $this->getPassword();
     }
 
-    public function hasRole(string $roleName) : bool
+    public function hasRole(string $roleName): bool
     {
         if (isset($this->roles)) {
             return $this->roles->getRoleByName($roleName) !== null;
@@ -176,12 +175,12 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         $this->roles = $roles;
     }
 
-    public function getRoles() : ? UserRoleCollectionInterface
+    public function getRoles(): ?UserRoleCollectionInterface
     {
         return $this->roles;
     }
 
-    public function hasPermission(string $permissionName) : bool
+    public function hasPermission(string $permissionName): bool
     {
         if ($this->roles) {
             foreach ($this->roles as $role) {
@@ -190,7 +189,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
                 }
             }
         }
-        
+
         return false;
     }
 
@@ -199,7 +198,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         $this->isActivated = $isActivated;
     }
 
-    public function getIsActivated() : bool
+    public function getIsActivated(): bool
     {
         return $this->isActivated;
     }
@@ -209,7 +208,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         $this->cookieAcceptanceStatus = $cookieAcceptanceStatus;
     }
 
-    public function getCookieAcceptanceStatus() : bool
+    public function getCookieAcceptanceStatus(): bool
     {
         return $this->cookieAcceptanceStatus;
     }
@@ -219,12 +218,12 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         $this->optOutToken = $optOutToken;
     }
 
-    public function getOptOutToken() : ? string
+    public function getOptOutToken(): ?string
     {
         return isset($this->optOutToken) ? $this->optOutToken : null;
     }
 
-    public function getEmailOptIn() : bool
+    public function getEmailOptIn(): bool
     {
         return $this->emailOptIn;
     }
@@ -235,7 +234,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
     }
 
 
-    public function getAPIToken() : ? string
+    public function getAPIToken(): ?string
     {
         return isset($this->apiToken) ? $this->apiToken : null;
     }
@@ -265,7 +264,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
                 $excludedMethods[] = $securityExcludedMethod;
             }
         }
-        
+
         return parent::jsonSerialize($excludedMethods);
     }
 
@@ -275,7 +274,7 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
         $this->banned = $banned;
     }
 
-    public function isBanned() : bool
+    public function isBanned(): bool
     {
         return $this->banned;
     }

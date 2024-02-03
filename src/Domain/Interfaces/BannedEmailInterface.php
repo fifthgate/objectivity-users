@@ -6,7 +6,7 @@ use Fifthgate\Objectivity\Core\Domain\Interfaces\DomainEntityInterface;
 
 interface BannedEmailInterface extends DomainEntityInterface
 {
-	public function getBannedEmailAddress() : string;
+    public function getBannedEmailAddress(): string;
 
-	public function getBanReason() : string;
+    public function getBanReason(): string;
 }

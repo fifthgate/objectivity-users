@@ -10,10 +10,10 @@ use Fifthgate\Objectivity\Core\Domain\Collection\Traits\JsonSerializesCollection
 class UserRoleCollection extends AbstractDomainEntityCollection implements UserRoleCollectionInterface
 {
     use JsonSerializesCollection;
-    
+
     private $permissionsCache = [];
 
-    public function getRoleByName(string $roleName) : ? UserRoleInterface
+    public function getRoleByName(string $roleName): ?UserRoleInterface
     {
         foreach ($this->collection as $item) {
             if ($item->getMachineName() == $roleName) {
@@ -23,7 +23,7 @@ class UserRoleCollection extends AbstractDomainEntityCollection implements UserR
         return null;
     }
 
-    public function getAllPermissions() : array
+    public function getAllPermissions(): array
     {
         // @codeCoverageIgnoreStart
         if (!empty($this->permissionsCache)) {
@@ -42,9 +42,9 @@ class UserRoleCollection extends AbstractDomainEntityCollection implements UserR
         return $permissions;
     }
 
-    public function filterByMachineNames(array $machineNames) : ? UserRoleCollectionInterface
+    public function filterByMachineNames(array $machineNames): ?UserRoleCollectionInterface
     {
-        $collection = new self;
+        $collection = new self();
         foreach ($this->collection as $role) {
             if (in_array($role->getMachineName(), $machineNames)) {
                 $collection->add($role);

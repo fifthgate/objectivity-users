@@ -53,7 +53,7 @@ class UserServiceProvider extends ServiceProvider
         $this->app->singleton(
             UserRoleCollectionInterface::class,
             function ($app) {
-                $rolesFactory = new UserRolesFactory;
+                $rolesFactory = new UserRolesFactory();
                 return $rolesFactory(config('app.debug', false));
             }
         );

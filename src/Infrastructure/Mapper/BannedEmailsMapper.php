@@ -11,7 +11,7 @@ use Fifthgate\Objectivity\Users\Domain\Collection\BannedEmailsCollection;
 use Fifthgate\Objectivity\Repositories\Infrastructure\Mapper\AbstractDomainEntityMapper;
 use Fifthgate\Objectivity\Core\Domain\Collection\Interfaces\DomainEntityCollectionInterface;
 use Fifthgate\Objectivity\Core\Domain\Interfaces\DomainEntityInterface;
-use \Exception;
+use Exception;
 
 class BannedEmailsMapper extends AbstractDomainEntityMapper implements BannedEmailsMapperInterface
 {
@@ -22,18 +22,18 @@ class BannedEmailsMapper extends AbstractDomainEntityMapper implements BannedEma
     protected bool $softDeletes = false;
 
 
-    public function makeCollection() : DomainEntityCollectionInterface
+    public function makeCollection(): DomainEntityCollectionInterface
     {
-        return new BannedEmailsCollection;
+        return new BannedEmailsCollection();
     }
 
-    public function mapEntity(array $result) : DomainEntityInterface
+    public function mapEntity(array $result): DomainEntityInterface
     {
         return self::staticMap($result);
     }
 
 
-    public static function staticMap(array $result) : DomainEntityInterface
+    public static function staticMap(array $result): DomainEntityInterface
     {
         $bannedEmail = $result['id'] ? new BannedEmailAddress($result['email'], $result['ban_reason'], $result['id']) : new BannedEmailAddress($result['email'], $result['ban_reason']);
 
@@ -50,14 +50,14 @@ class BannedEmailsMapper extends AbstractDomainEntityMapper implements BannedEma
      * @param  DomainEntityInterface $domainEntity The Banned Email entity
      * @return DomainEntityInterface The Banned Email Entity
      */
-    protected function update(DomainEntityInterface $domainEntity) : DomainEntityInterface
+    protected function update(DomainEntityInterface $domainEntity): DomainEntityInterface
     {
         throw new Exception("You can't update a banned e-mail");
     }
 
-    protected function create(DomainEntityInterface $domainEntity) : DomainEntityInterface
+    protected function create(DomainEntityInterface $domainEntity): DomainEntityInterface
     {
-        $createdAt = new Carbon;
+        $createdAt = new Carbon();
         $id = $this->db->table($this->getTableName())->insertGetId([
             'email' => $domainEntity->getBannedEmailAddress(),
             'ban_reason' => $domainEntity->getBanReason(),

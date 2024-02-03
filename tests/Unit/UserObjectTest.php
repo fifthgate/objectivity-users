@@ -9,7 +9,7 @@ use Fifthgate\Objectivity\Users\Domain\LaravelUser;
 
 use Fifthgate\Objectivity\Users\Service\Interfaces\UserServiceInterface;
 use Illuminate\Support\Facades\Hash;
-use \DateTime;
+use DateTime;
 use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\UserRoleCollectionInterface;
 use Fifthgate\Objectivity\Users\Domain\Collection\UserRoleCollection;
 use Fifthgate\Objectivity\Users\Domain\ValueObjects\UserRole;
@@ -19,12 +19,12 @@ class UserObjectTest extends ObjectivityUsersTestCase
 {
     public function testUser(): void
     {
-        $roles = new UserRoleCollection;
+        $roles = new UserRoleCollection();
         $role = $this->userService->getRoles()->getRoleByName("registered-user");
         $this->assertNull($this->userService->getRoles()->getRoleByName("governmentSwami"));
         $roles->add($role);
         $hashedPassword = Hash::make("LoremIpsum");
-        $createdAt = new DateTime;
+        $createdAt = new DateTime();
         $user = new LaravelUser(
             "lipsum@lipsum.com",
             "Laura Ipsum",
@@ -32,7 +32,6 @@ class UserObjectTest extends ObjectivityUsersTestCase
             false,
             false,
             false
-
         );
         $user->setID(1);
         $user->setPassword($hashedPassword);
@@ -88,11 +87,11 @@ class UserObjectTest extends ObjectivityUsersTestCase
 
     public function testUserSerialization()
     {
-        $roles = new UserRoleCollection;
+        $roles = new UserRoleCollection();
         $role = $this->userService->getRoles()->getRoleByName("registered-user");
         $roles->add($role);
         $hashedPassword = Hash::make("LoremIpsum");
-        $createdAt = new DateTime;
+        $createdAt = new DateTime();
         $user = new LaravelUser(
             "lipsum@lipsum.com",
             "Laura Ipsum",
@@ -114,7 +113,7 @@ class UserObjectTest extends ObjectivityUsersTestCase
         $user->setOptOutToken($optOutToken);
 
         $output = $user->jsonSerialize();
-        
+
         $this->assertFalse(isset($output['password']));
         $this->assertFalse(isset($output['remember_token']));
     }

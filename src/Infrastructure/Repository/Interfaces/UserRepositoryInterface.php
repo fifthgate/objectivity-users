@@ -9,15 +9,15 @@ use Fifthgate\Objectivity\Users\Domain\Collection\Interfaces\BannedEmailCollecti
 
 interface UserRepositoryInterface extends DomainEntityRepositoryInterface
 {
-    public function retrieveByCredentials(array $credentials) : ? UserInterface;
+    public function retrieveByCredentials(array $credentials): ?UserInterface;
 
-    public function retrieveByIDAndToken(int $id, string $token) : ? UserInterface;
+    public function retrieveByIDAndToken(int $id, string $token): ?UserInterface;
 
     public function banEmail(string $emailAddress, string $reason);
 
-    public function getBannedEmails() : BannedEmailCollectionInterface;
+    public function getBannedEmails(): BannedEmailCollectionInterface;
 
-    public function emailIsBanned(string $emailAddress) : bool;
+    public function emailIsBanned(string $emailAddress): bool;
 
-    public function getBanReason(string $emailAddress) : ? string;
+    public function getBanReason(string $emailAddress): ?string;
 }

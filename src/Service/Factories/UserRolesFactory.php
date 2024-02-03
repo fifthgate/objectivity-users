@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
-use \Exception;
+use Exception;
 use Fifthgate\Objectivity\Users\Domain\ValueObjects\UserRole;
 use Fifthgate\Objectivity\Users\Domain\Collection\UserRoleCollection;
 use Fifthgate\Objectivity\Users\Service\UserService;
@@ -16,7 +16,7 @@ use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 
 class UserRolesFactory
 {
-    const CACHEKEY = 'user_service_config_cache';
+    public const CACHEKEY = 'user_service_config_cache';
 
     public function __invoke(bool $testMode = false)
     {
@@ -25,14 +25,14 @@ class UserRolesFactory
          * Rebuild the index if there isn't a cached version available.
          */
         if (!$rolesCollection or $testMode) {
-            $date = new Carbon;
+            $date = new Carbon();
             Log::info("Role cache rebuilt at {$date}");
-            
+
             $rolesArray = config('objectivity-user-roles');
             foreach ($rolesArray as $roleMachineName => $roleDefinitionArray) {
                 $this->validateRole($roleMachineName, $roleDefinitionArray);
             }
-            $rolesCollection = new UserRoleCollection;
+            $rolesCollection = new UserRoleCollection();
             foreach ($rolesArray as $roleMachineName => $roleDefinitionArray) {
                 $rolesCollection->add(
                     new UserRole(
@@ -47,7 +47,7 @@ class UserRolesFactory
         }
         return $rolesCollection;
     }
-    
+
     /**
     * @codeCoverageIgnore
     */
@@ -58,7 +58,7 @@ class UserRolesFactory
             'description' => 'string',
             'permissions' => 'array'
         ];
-        
+
         if (!is_string($roleMachineName) or preg_match('/[^a-z_\-0-9]/i', $roleMachineName)) {
             throw new Exception("The Role's machine name must be an alphanumeric string with no spaces");
         }
