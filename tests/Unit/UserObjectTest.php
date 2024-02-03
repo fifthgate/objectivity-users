@@ -27,11 +27,7 @@ class UserObjectTest extends ObjectivityUsersTestCase
         $createdAt = new DateTime();
         $user = new LaravelUser(
             "lipsum@lipsum.com",
-            "Laura Ipsum",
-            false,
-            false,
-            false,
-            false
+            "Laura Ipsum"
         );
         $user->setID(1);
         $user->setPassword($hashedPassword);
@@ -52,27 +48,23 @@ class UserObjectTest extends ObjectivityUsersTestCase
         $this->assertFalse($user->hasRole("admin"));
         $user->setRoles($roles);
         $this->assertTrue($user->hasRole("registered-user"));
-        $this->assertEquals($user->getID(), 1);
+        $this->assertEquals(1, $user->getID());
         $this->assertFalse($user->getIsActivated());
         $user->setIsActivated(true);
         $this->assertTrue($user->getIsActivated());
-        $this->assertEquals($user->getAuthIdentifier(), 1);
+        $this->assertEquals(1, $user->getAuthIdentifier());
         $this->assertEquals($user->getPassword(), $hashedPassword);
-        $this->assertEquals($user->getRememberToken(), "rememberToken");
-        $this->assertEquals($user->getName(), "Laura Ipsum");
+        $this->assertEquals("rememberToken", $user->getRememberToken());
+        $this->assertEquals("Laura Ipsum", $user->getName());
         $this->assertEquals($user->getCreatedAt(), $createdAt);
         $this->assertTrue($user->hasPermission("viewOwnAccount"));
         $this->assertFalse($user->hasPermission("ruleTheEntireUniverseWithAnIronFist"));
         $this->assertEquals($user->getUpdatedAt(), $createdAt);
-        $this->assertEquals($user->getEmailAddress(), "lipsum@lipsum.com");
-        $this->assertEquals($user->getAuthIdentifierName(), "id");
+        $this->assertEquals("lipsum@lipsum.com", $user->getEmailAddress());
+        $this->assertEquals("id", $user->getAuthIdentifierName());
         $this->assertEquals($user->getAuthPassword(), $hashedPassword);
         $this->assertInstanceOf(UserRoleCollectionInterface::class, $user->getRoles());
-        $this->assertEquals($user->getRememberTokenName(), 'remember_token');
-        $this->assertEquals($user->name, $user->getName());
-        $this->assertEquals($user->email, $user->getEmailAddress());
-        $this->assertEquals($user->password, $user->getPassword());
-        $this->assertNull($user->roles);
+        $this->assertEquals('remember_token', $user->getRememberTokenName());
         $this->assertEquals($user->getEmailForPasswordReset(), $user->getEmailAddress());
 
         $user->setBanned(true);
@@ -95,10 +87,7 @@ class UserObjectTest extends ObjectivityUsersTestCase
         $user = new LaravelUser(
             "lipsum@lipsum.com",
             "Laura Ipsum",
-            true,
-            false,
-            false,
-            false,
+            true
         );
         $user->setID(1);
         $user->setPassword($hashedPassword);

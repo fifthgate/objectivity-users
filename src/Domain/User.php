@@ -36,10 +36,10 @@ class User extends AbstractSerializableDomainEntity implements UserInterface
     public function __construct(
         string $emailAddress,
         string $name,
-        bool $isActivated,
-        bool $cookieAcceptanceStatus,
-        bool $emailOptIn,
-        bool $banned
+        bool $isActivated = false,
+        bool $cookieAcceptanceStatus = false,
+        bool $emailOptIn = false,
+        bool $banned = false
     ) {
         $this->emailAddress = $emailAddress;
         $this->name = $name;

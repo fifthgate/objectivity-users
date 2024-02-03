@@ -9,9 +9,9 @@ use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-
 class UserHasRoleMiddleware extends Middleware
 {
+    use GeneratesForbiddenResponseTrait;
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *
@@ -40,14 +40,18 @@ class UserHasRoleMiddleware extends Middleware
     public function handle($request, Closure $next, ...$guards)
     {
         $roleString = reset($guards);
-
-        if (strpos($roleString, ",") !== false) {
-            $roles = explode(",", $roleString);
+        if ($roleString) {
+            if (strpos($roleString, ",") !== false) {
+                $roles = explode(",", $roleString);
+            } else {
+                $roles = [
+                    0 => $roleString
+                ];
+            }
         } else {
-            $roles = [
-                0 => $roleString
-            ];
+            return $this->generateForbiddenResponse();
         }
+
         $userHasAtLeastOneRole = false;
         $user = $request->user();
 
@@ -60,9 +64,11 @@ class UserHasRoleMiddleware extends Middleware
         }
 
         if (!$userHasAtLeastOneRole) {
-            return response()->json(["message" => "access_denied"], 403);
+            return $this->generateForbiddenResponse();
         }
 
         return $next($request);
     }
+
+
 }

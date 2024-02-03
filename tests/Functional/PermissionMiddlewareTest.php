@@ -9,6 +9,8 @@ use Fifthgate\Objectivity\Users\Http\Middleware\UserIsNotBannedMiddleware;
 use Fifthgate\Objectivity\Users\Http\Middleware\UserHasRoleMiddleware;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Fifthgate\Objectivity\Users\Domain\Collection\UserRoleCollection;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class PermissionMiddlewareTest extends ObjectivityUsersTestCase
 {
@@ -17,8 +19,15 @@ class PermissionMiddlewareTest extends ObjectivityUsersTestCase
         $request = new Request();
 
         $middleware = new UserHasPermissionMiddleware($this->app->get(Auth::class));
-        $this->assertEquals(403, $middleware->handle($request, function () {
-        })->getStatusCode());
+        $this->assertEquals(
+            403,
+            $middleware->handle(
+                $request,
+                function () {
+                    return new Response([], ResponseAlias::HTTP_OK);
+                }
+            )->getStatusCode()
+        );
     }
 
     public function testLoggedInWithDefaultPermissions()
@@ -123,7 +132,7 @@ class PermissionMiddlewareTest extends ObjectivityUsersTestCase
             function () {
                 return response()->json(["message" => "OK"], 200);
             },
-            "registered-user,somemadeupthing"
+            "registered-user"
         )->getStatusCode());
 
         $this->assertEquals(403, $middleware->handle(

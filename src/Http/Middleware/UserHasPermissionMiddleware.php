@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class UserHasPermissionMiddleware extends Middleware
 {
+    use GeneratesForbiddenResponseTrait;
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *
@@ -39,10 +40,18 @@ class UserHasPermissionMiddleware extends Middleware
     public function handle($request, Closure $next, ...$guards)
     {
         $requestedPermission = reset($guards);
-        if (!$request->user() or !$request->user()->hasPermission($requestedPermission)) {
-            return response()->json(["message" => "access_denied"], 403);
+        if (!$request->user()) {
+            return $this->generateForbiddenResponse();
         }
+        if ($requestedPermission) {
+            if (!$request->user()->hasPermission($requestedPermission)) {
+                return $this->generateForbiddenResponse();
+            }
+        }
+
 
         return $next($request);
     }
+
+
 }
